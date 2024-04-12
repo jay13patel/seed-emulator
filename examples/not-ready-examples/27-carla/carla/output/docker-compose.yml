@@ -583,6 +583,13 @@ services:
             org.seedsecuritylabs.seedemu.meta.net.0.name: "ix100"
             org.seedsecuritylabs.seedemu.meta.net.0.address: "10.100.0.100/24"
 
+    seedemu-internet-client:
+        image: handsonsecurity/seedemu-multiarch-map:buildx-latest
+        container_name: seedemu_internet_map
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+        ports:
+            - 8090:8080/tcp      
 
 networks:
     net_150_net0:
