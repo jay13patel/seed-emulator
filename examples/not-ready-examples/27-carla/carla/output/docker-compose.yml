@@ -30,8 +30,6 @@ services:
         environment:
             WS_IP: "10.150.0.71"
             WS_PORT: 6789
-            CARLA_IP: "128.230.114.88"
-            CARLA_PORT: 2000
         ports:
            - "6789:6789"
 
@@ -589,8 +587,12 @@ services:
         volumes:
             - /var/run/docker.sock:/var/run/docker.sock
         ports:
-            - 8090:8080/tcp      
-
+            - 8090:8080/tcp
+    carlaviz:
+        image: mjxu96/carlaviz:0.9.15
+        network_mode: host
+        command: ["--simulator_host", "128.230.114.88", "--simulator_ego_vehicle_name", "seed_car_1"]     
+        
 networks:
     net_150_net0:
         driver_opts:

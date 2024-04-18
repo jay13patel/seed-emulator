@@ -12,7 +12,7 @@ import numpy.random as random
 import re
 import sys
 import weakref
-import datetime
+
 import asyncio
 import websockets
 import json
@@ -58,9 +58,9 @@ import carla
 from carla import ColorConverter as cc
 
 
-from agents.navigation.behavior_agent import BehaviorAgent  # pylint: disable=import-error
-from agents.navigation.basic_agent import BasicAgent  # pylint: disable=import-error
-from agents.navigation.constant_velocity_agent import ConstantVelocityAgent  # pylint: disable=import-error
+from carla.agents.navigation.behavior_agent import BehaviorAgent  # pylint: disable=import-error
+from carla.agents.navigation.basic_agent import BasicAgent  # pylint: disable=import-error
+from carla.agents.navigation.constant_velocity_agent import ConstantVelocityAgent  # pylint: disable=import-error
 
 # ==============================================================================
 # -- WebSocketClient -----------------------------------------------------------
@@ -187,7 +187,7 @@ class World(object):
         self.collision_sensor = None
         self.lane_invasion_sensor = None
         self.gnss_sensor = None
-        self.camera_manager = None
+        #self.camera_manager = None
         self._weather_presets = find_weather_presets()
         self._weather_index = 0
         self._actor_filter = args.filter
@@ -198,8 +198,8 @@ class World(object):
     def restart(self, args):
         """Restart the world"""
         # Keep same camera config if the camera manager exists.
-        cam_index = self.camera_manager.index if self.camera_manager is not None else 0
-        cam_pos_id = self.camera_manager.transform_index if self.camera_manager is not None else 0
+        #cam_index = self.camera_manager.index if self.camera_manager is not None else 0
+        #cam_pos_id = self.camera_manager.transform_index if self.camera_manager is not None else 0
 
         # Get a random blueprint.
         blueprint_list = get_actor_blueprints(self.world, self._actor_filter, self._actor_generation)
@@ -239,9 +239,9 @@ class World(object):
         self.collision_sensor = CollisionSensor(self.player)
         self.lane_invasion_sensor = LaneInvasionSensor(self.player)
         self.gnss_sensor = GnssSensor(self.player)
-        self.camera_manager = CameraManager(self.player)
-        self.camera_manager.transform_index = cam_pos_id
-        self.camera_manager.set_sensor(cam_index, notify=False)
+        #self.camera_manager = CameraManager(self.player)
+        #self.camera_manager.transform_index = cam_pos_id
+        #self.camera_manager.set_sensor(cam_index, notify=False)
         actor_type = get_actor_display_name(self.player)
         print(actor_type)
 
@@ -270,18 +270,18 @@ class World(object):
     
     def render(self, display):
         """Render world"""
-        self.camera_manager.render(display)
+        #self.camera_manager.render(display)
            
     def destroy_sensors(self):
         """Destroy sensors"""
-        self.camera_manager.sensor.destroy()
-        self.camera_manager.sensor = None
-        self.camera_manager.index = None
+        #self.camera_manager.sensor.destroy()
+        #self.camera_manager.sensor = None
+        #self.camera_manager.index = None
 
     def destroy(self):
         """Destroys all actors"""
         actors = [
-            self.camera_manager.sensor,
+            #self.camera_manager.sensor,
             self.collision_sensor.sensor,
             self.lane_invasion_sensor.sensor,
             self.gnss_sensor.sensor,

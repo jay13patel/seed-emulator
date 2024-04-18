@@ -12,8 +12,7 @@ import numpy.random as random
 import re
 import sys
 import weakref
-
-
+import datetime
 import asyncio
 import websockets
 import json
@@ -115,20 +114,18 @@ class WebSocketClient:
         await asyncio.sleep(5)
         # Check every second, adjust as needed
         # Once done, send notification
-        r_name = self.vehicle.attributes.get('role_name')
         message = json.dumps({
             "type": "destination_reached",
-            "role_name": r_name,
+            "role_name": "seed_car_1",
             "message": f"{self.vehicle.attributes.get('role_name')} has reached the destination {location_name}"
         })
         async with websockets.connect(uri) as websocket:
             await websocket.send(message)
 
-
 # ==============================================================================
 # -- Global functions ----------------------------------------------------------
 # ==============================================================================
-role_name = None
+
 
 def find_weather_presets():
     """Method to find weather presets"""
@@ -136,6 +133,7 @@ def find_weather_presets():
     def name(x): return ' '.join(m.group(0) for m in rgx.finditer(x))
     presets = [x for x in dir(carla.WeatherParameters) if re.match('[A-Z].+', x)]
     return [(getattr(carla.WeatherParameters, x), name(x)) for x in presets]
+
 
 def get_actor_display_name(actor, truncate=250):
     """Method to get actor display name"""
@@ -189,7 +187,7 @@ class World(object):
         self.collision_sensor = None
         self.lane_invasion_sensor = None
         self.gnss_sensor = None
-        #self.camera_manager = None
+        self.camera_manager = None
         self._weather_presets = find_weather_presets()
         self._weather_index = 0
         self._actor_filter = args.filter
@@ -200,15 +198,15 @@ class World(object):
     def restart(self, args):
         """Restart the world"""
         # Keep same camera config if the camera manager exists.
-        #cam_index = self.camera_manager.index if self.camera_manager is not None else 0
-        #cam_pos_id = self.camera_manager.transform_index if self.camera_manager is not None else 0
+        cam_index = self.camera_manager.index if self.camera_manager is not None else 0
+        cam_pos_id = self.camera_manager.transform_index if self.camera_manager is not None else 0
 
         # Get a random blueprint.
         blueprint_list = get_actor_blueprints(self.world, self._actor_filter, self._actor_generation)
         if not blueprint_list:
             raise ValueError("Couldn't find any blueprints with the specified filters")
         blueprint = random.choice(blueprint_list)
-        blueprint.set_attribute('role_name', role_name)
+        blueprint.set_attribute('role_name', 'seed_car_1')
         if blueprint.has_attribute('color'):
             color = random.choice(blueprint.get_attribute('color').recommended_values)
             blueprint.set_attribute('color', color)
@@ -241,11 +239,13 @@ class World(object):
         self.collision_sensor = CollisionSensor(self.player)
         self.lane_invasion_sensor = LaneInvasionSensor(self.player)
         self.gnss_sensor = GnssSensor(self.player)
-        #self.camera_manager = CameraManager(self.player)
-        #self.camera_manager.transform_index = cam_pos_id
-        #self.camera_manager.set_sensor(cam_index, notify=False)
+        self.camera_manager = CameraManager(self.player)
+        self.camera_manager.transform_index = cam_pos_id
+        self.camera_manager.set_sensor(cam_index, notify=False)
         actor_type = get_actor_display_name(self.player)
         print(actor_type)
+
+
 
     def next_weather(self, reverse=False):
         """Get next weather setting"""
@@ -267,17 +267,21 @@ class World(object):
     def tick(self, clock):
         """Method for every tick"""
         self.tick(self, clock)
+    
+    def render(self, display):
+        """Render world"""
+        self.camera_manager.render(display)
            
     def destroy_sensors(self):
         """Destroy sensors"""
-        #self.camera_manager.sensor.destroy()
-        #self.camera_manager.sensor = None
-        #self.camera_manager.index = None
+        self.camera_manager.sensor.destroy()
+        self.camera_manager.sensor = None
+        self.camera_manager.index = None
 
     def destroy(self):
         """Destroys all actors"""
         actors = [
-            #self.camera_manager.sensor,
+            self.camera_manager.sensor,
             self.collision_sensor.sensor,
             self.lane_invasion_sensor.sensor,
             self.gnss_sensor.sensor,
@@ -469,6 +473,11 @@ class CameraManager(object):
         """Get the next sensor"""
         self.set_sensor(self.index + 1)
 
+    def render(self, display):
+        """Render method"""
+        if self.surface is not None:
+            display.blit(self.surface, (0, 0))
+
     @staticmethod
     def _parse_image(weak_self, image):
         self = weak_self()
@@ -478,12 +487,12 @@ class CameraManager(object):
             points = np.frombuffer(image.raw_data, dtype=np.dtype('f4'))
             points = np.reshape(points, (int(points.shape[0] / 4), 4))
             lidar_data = np.array(points[:, :2])
-            lidar_data *= min(image.width,image.height) / 100.0
-            lidar_data += (0.5 * image.width, 0.5 * image.height)
+            lidar_data *= min(800,600) / 100.0
+            lidar_data += (0.5 * 800, 0.5 * 600)
             lidar_data = np.fabs(lidar_data)  # pylint: disable=assignment-from-no-return
             lidar_data = lidar_data.astype(np.int32)
             lidar_data = np.reshape(lidar_data, (-1, 2))
-            lidar_img_size = (image.width, image.height, 3)
+            lidar_img_size = (800, 600, 3)
             lidar_img = np.zeros(lidar_img_size)
             lidar_img[tuple(lidar_data.T)] = (255, 255, 255)
             #self.surface = lidar_img
@@ -493,6 +502,7 @@ class CameraManager(object):
             array = np.reshape(array, (image.height, image.width, 4))
             array = array[:, :, :3]
             array = array[:, :, ::-1]
+            #self.surface = array
 
 # ==============================================================================
 # -- Game Loop ---------------------------------------------------------
@@ -509,12 +519,15 @@ def game_loop(args):
     try:
         if args.seed:
             random.seed(args.seed)
-
+        
         client = carla.Client(args.host, args.port)
+        print("Test1")
         client.set_timeout(60.0)
 
         traffic_manager = client.get_trafficmanager()
+        print("test2 traffic manager is not working")
         sim_world = client.get_world()
+        print("test3 sim w")
 
         if args.sync:
             settings = sim_world.get_settings()
@@ -537,8 +550,7 @@ def game_loop(args):
             agent.follow_speed_limits(True)
         elif args.agent == "Behavior":
             agent = BehaviorAgent(world.player, behavior=args.behavior)
-
-        # Set the Websocket client   
+            
         websocket_client = WebSocketClient(world.player, agent, args.ws_ip, args.ws_port)
         thread = Thread(target=websocket_client.start_websocket_client)
         thread.daemon = True
@@ -654,17 +666,8 @@ def main():
         '--ws_port', 
         default=6789,  
         help='WebSocket server port (default: 6789)')
-    argparser.add_argument(
-        '--r_name', 
-        default='seed_car_1', 
-        help="Role name for the vehicle")
-
-    
-
 
     args = argparser.parse_args()
-    global role_name 
-    role_name= "seed" + args.r_name
 
     args.width, args.height = [int(x) for x in args.res.split('x')]
 
