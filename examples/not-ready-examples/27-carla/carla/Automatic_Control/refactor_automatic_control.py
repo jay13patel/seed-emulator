@@ -544,11 +544,14 @@ def game_loop(args):
         elif args.agent == "Behavior":
             agent = BehaviorAgent(world.player, behavior=args.behavior)
 
-        # Set the Websocket client   
-        websocket_client = WebSocketClient(world.player, agent, args.ws_ip, args.ws_port)
-        thread = Thread(target=websocket_client.start_websocket_client)
-        thread.daemon = True
-        thread.start()
+        # Set the Websocket client
+        if args.ws_enable == "on":   
+            websocket_client = WebSocketClient(world.player, agent, args.ws_ip, args.ws_port)
+            thread = Thread(target=websocket_client.start_websocket_client)
+            thread.daemon = True
+            thread.start()
+        else:
+            print("WebSocket client is disabled.")
 
         # Set the agent destination
         spawn_points = world.map.get_spawn_points()
@@ -674,6 +677,12 @@ def main():
         choices=['on', 'off'], 
         default='off', 
         help='Control the camera manager (on/off)')
+    argparser.add_argument(
+        '--ws_enable', 
+        choices=["on", "off"], 
+        default="on", 
+        help="Enable or disable the WebSocket client (on/off)")
+
 
 
 
