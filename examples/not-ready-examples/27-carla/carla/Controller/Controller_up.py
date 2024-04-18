@@ -59,7 +59,7 @@ def get_vehicle_roles():
     for vehicle in vehicle_actors:
         role_name = vehicle.attributes.get('role_name', 'Unknown')
         if role_name.startswith('seed'):
-            print(f"Vehicle {vehicle.id} with role: {role_name[4:]}")
+            print(f"Vehicle {vehicle.id} with role: {role_name}")
 
 async def get_vehicle_info(role_name):
     # Get detailed information about a vehicle based on its role name
