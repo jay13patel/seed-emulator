@@ -114,9 +114,10 @@ class WebSocketClient:
         await asyncio.sleep(5)
         # Check every second, adjust as needed
         # Once done, send notification
+        r_name = self.vehicle.attributes.get('role_name')
         message = json.dumps({
             "type": "destination_reached",
-            "role_name": "seed_car_1",
+            "role_name": r_name,
             "message": f"{self.vehicle.attributes.get('role_name')} has reached the destination {location_name}"
         })
         async with websockets.connect(uri) as websocket:
@@ -125,7 +126,7 @@ class WebSocketClient:
 # ==============================================================================
 # -- Global functions ----------------------------------------------------------
 # ==============================================================================
-
+role_name = None
 
 def find_weather_presets():
     """Method to find weather presets"""
@@ -206,7 +207,7 @@ class World(object):
         if not blueprint_list:
             raise ValueError("Couldn't find any blueprints with the specified filters")
         blueprint = random.choice(blueprint_list)
-        blueprint.set_attribute('role_name', 'seed_car_1')
+        blueprint.set_attribute('role_name', role_name)
         if blueprint.has_attribute('color'):
             color = random.choice(blueprint.get_attribute('color').recommended_values)
             blueprint.set_attribute('color', color)
@@ -663,8 +664,17 @@ def main():
         '--ws_port', 
         default=6789,  
         help='WebSocket server port (default: 6789)')
+    argparser.add_argument(
+        '--r_name', 
+        default='seed_car_1', 
+        help="Role name for the vehicle")
+
+    
+
 
     args = argparser.parse_args()
+    global role_name 
+    role_name= "seed" + args.r_name
 
     args.width, args.height = [int(x) for x in args.res.split('x')]
 
