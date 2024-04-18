@@ -177,6 +177,7 @@ class World(object):
         """Constructor method"""
         self._args = args
         self.world = carla_world
+        self.camera_enabled = (args.cam == 'on')
         try:
             self.map = self.world.get_map()
         except RuntimeError as error:
@@ -188,7 +189,8 @@ class World(object):
         self.collision_sensor = None
         self.lane_invasion_sensor = None
         self.gnss_sensor = None
-        self.camera_manager = None
+        if self.camera_enabled:
+            self.camera_manager = None
         self._weather_presets = find_weather_presets()
         self._weather_index = 0
         self._actor_filter = args.filter
@@ -199,8 +201,9 @@ class World(object):
     def restart(self, args):
         """Restart the world"""
         # Keep same camera config if the camera manager exists.
-        cam_index = self.camera_manager.index if self.camera_manager is not None else 0
-        cam_pos_id = self.camera_manager.transform_index if self.camera_manager is not None else 0
+        if self.camera_enabled:
+            cam_index = self.camera_manager.index if self.camera_manager is not None else 0
+            cam_pos_id = self.camera_manager.transform_index if self.camera_manager is not None else 0
 
         # Get a random blueprint.
         blueprint_list = get_actor_blueprints(self.world, self._actor_filter, self._actor_generation)
@@ -240,9 +243,10 @@ class World(object):
         self.collision_sensor = CollisionSensor(self.player)
         self.lane_invasion_sensor = LaneInvasionSensor(self.player)
         self.gnss_sensor = GnssSensor(self.player)
-        self.camera_manager = CameraManager(self.player)
-        self.camera_manager.transform_index = cam_pos_id
-        self.camera_manager.set_sensor(cam_index, notify=False)
+        if self.camera_enabled:
+            self.camera_manager = CameraManager(self.player)
+            self.camera_manager.transform_index = cam_pos_id
+            self.camera_manager.set_sensor(cam_index, notify=False)
         actor_type = get_actor_display_name(self.player)
         print(actor_type)
 
@@ -275,14 +279,15 @@ class World(object):
            
     def destroy_sensors(self):
         """Destroy sensors"""
-        self.camera_manager.sensor.destroy()
-        self.camera_manager.sensor = None
-        self.camera_manager.index = None
+        if self.camera_enabled:
+            self.camera_manager.sensor.destroy()
+            self.camera_manager.sensor = None
+            self.camera_manager.index = None
 
     def destroy(self):
         """Destroys all actors"""
         actors = [
-            self.camera_manager.sensor,
+            self.camera_manager.sensor if self.camera_enabled else None,
             self.collision_sensor.sensor,
             self.lane_invasion_sensor.sensor,
             self.gnss_sensor.sensor,
@@ -668,8 +673,14 @@ def main():
         '--r_name', 
         default='seed_car_1', 
         help="Role name for the vehicle")
+    argparser.add_argument(
+        '--cam', 
+        choices=['on', 'off'], 
+        default='off', 
+        help='Control the camera manager (on/off)')
 
-    
+
+
 
 
     args = argparser.parse_args()
