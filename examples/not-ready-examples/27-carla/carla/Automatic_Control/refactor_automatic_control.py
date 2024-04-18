@@ -190,12 +190,8 @@ class World(object):
         self.collision_sensor = None
         self.lane_invasion_sensor = None
         self.gnss_sensor = None
-<<<<<<< HEAD
-        #self.camera_manager = None
-=======
         if self.camera_enabled:
             self.camera_manager = None
->>>>>>> refs/remotes/origin/carla
         self._weather_presets = find_weather_presets()
         self._weather_index = 0
         self._actor_filter = args.filter
@@ -206,14 +202,9 @@ class World(object):
     def restart(self, args):
         """Restart the world"""
         # Keep same camera config if the camera manager exists.
-<<<<<<< HEAD
-        #cam_index = self.camera_manager.index if self.camera_manager is not None else 0
-        #cam_pos_id = self.camera_manager.transform_index if self.camera_manager is not None else 0
-=======
         if self.camera_enabled:
             cam_index = self.camera_manager.index if self.camera_manager is not None else 0
             cam_pos_id = self.camera_manager.transform_index if self.camera_manager is not None else 0
->>>>>>> refs/remotes/origin/carla
 
         # Get a random blueprint.
         blueprint_list = get_actor_blueprints(self.world, self._actor_filter, self._actor_generation)
@@ -253,16 +244,10 @@ class World(object):
         self.collision_sensor = CollisionSensor(self.player)
         self.lane_invasion_sensor = LaneInvasionSensor(self.player)
         self.gnss_sensor = GnssSensor(self.player)
-<<<<<<< HEAD
-        #self.camera_manager = CameraManager(self.player)
-        #self.camera_manager.transform_index = cam_pos_id
-        #self.camera_manager.set_sensor(cam_index, notify=False)
-=======
         if self.camera_enabled:
             self.camera_manager = CameraManager(self.player)
             self.camera_manager.transform_index = cam_pos_id
             self.camera_manager.set_sensor(cam_index, notify=False)
->>>>>>> refs/remotes/origin/carla
         actor_type = get_actor_display_name(self.player)
         print(actor_type)
 
@@ -289,25 +274,15 @@ class World(object):
            
     def destroy_sensors(self):
         """Destroy sensors"""
-<<<<<<< HEAD
-        #self.camera_manager.sensor.destroy()
-        #self.camera_manager.sensor = None
-        #self.camera_manager.index = None
-=======
         if self.camera_enabled:
             self.camera_manager.sensor.destroy()
             self.camera_manager.sensor = None
             self.camera_manager.index = None
->>>>>>> refs/remotes/origin/carla
 
     def destroy(self):
         """Destroys all actors"""
         actors = [
-<<<<<<< HEAD
-            #self.camera_manager.sensor,
-=======
             self.camera_manager.sensor if self.camera_enabled else None,
->>>>>>> refs/remotes/origin/carla
             self.collision_sensor.sensor,
             self.lane_invasion_sensor.sensor,
             self.gnss_sensor.sensor,
