@@ -6,8 +6,8 @@ import json
 # Setting up command line argument parsing to configure the WebSocket server.
 # This allows for dynamic IP and port configuration when starting the server.
 parser = argparse.ArgumentParser(description='Webserver for handling CARLA vehicle commands.')
-parser.add_argument('--ws_ip', default='localhost', help='IP address for the WebSocket server.')
-parser.add_argument('--ws_port', type=int, default=6789, help='Port number for the WebSocket server.')
+parser.add_argument('--w_ip', default='localhost', help='IP address for the WebSocket server.')
+parser.add_argument('--w_port', type=int, default=6789, help='Port number for the WebSocket server.')
 args = parser.parse_args()
 
 # A set to keep track of connected clients. This is used to manage multiple connections.
@@ -55,7 +55,7 @@ async def handle_client(websocket, path):
         connected_clients.remove(websocket)
 
 # Start the WebSocket server and bind it to the specified IP and port.
-start_server = websockets.serve(handle_client, args.ws_ip, args.ws_port)
+start_server = websockets.serve(handle_client, args.w_ip, args.w_port)
 asyncio.get_event_loop().run_until_complete(start_server)
 
 # The server will run indefinitely until it is manually interrupted, typically with a Ctrl+C.

@@ -63,6 +63,7 @@ def get_vehicle_roles():
 
 async def get_vehicle_info(role_name):
     # Get detailed information about a vehicle based on its role name
+    role_name= "seed" + args.c_info
     client = carla.Client(args.c_ip, args.c_port)
     client.set_timeout(10.0)
     world = client.get_world()   
