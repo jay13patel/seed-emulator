@@ -145,6 +145,8 @@ services:
             WS_PORT: 6789
             CARLA_IP: "128.230.114.88"
             CARLA_PORT: 2000
+            ROLE_NAME: car1
+            CAMERA: on
             
 
         labels:
@@ -204,6 +206,8 @@ services:
             WS_PORT: 6789
             CARLA_IP: "128.230.114.88"
             CARLA_PORT: 2000
+            ROLE_NAME: car2
+            CAMERA: on
 
 
         labels:
@@ -263,6 +267,8 @@ services:
             WS_PORT: 6789
             CARLA_IP: "128.230.114.88"
             CARLA_PORT: 2000
+            ROLE_NAME: car3
+            CAMERA: on
 
         labels:
             org.seedsecuritylabs.seedemu.meta.asn: "154"
@@ -321,6 +327,8 @@ services:
             WS_PORT: 6789
             CARLA_IP: "128.230.114.88"
             CARLA_PORT: 2000
+            ROLE_NAME: car4
+            CAMERA: on
         
         labels:
             org.seedsecuritylabs.seedemu.meta.asn: "155"
@@ -379,6 +387,8 @@ services:
             WS_PORT: 6789
             CARLA_IP: "128.230.114.88"
             CARLA_PORT: 2000
+            ROLE_NAME: car5
+            CAMERA: on
         
 
         labels:
@@ -438,6 +448,8 @@ services:
             WS_PORT: 6789
             CARLA_IP: "128.230.114.88"
             CARLA_PORT: 2000
+            ROLE_NAME: car6
+            CAMERA: on
 
 
         labels:
@@ -589,6 +601,7 @@ services:
             - /var/run/docker.sock:/var/run/docker.sock
         ports:
             - 8090:8080/tcp
+    
     carlaviz:
         image: mjxu96/carlaviz:0.9.15
         network_mode: host

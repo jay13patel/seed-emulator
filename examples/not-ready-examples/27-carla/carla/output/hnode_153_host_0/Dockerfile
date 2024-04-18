@@ -15,7 +15,7 @@ RUN python3.7 -m pip install --upgrade pip
 COPY 082b96ec819c95ae773daebde675ef80 /start.sh
 COPY d18858afc6bb66ec3a19d872077acfd2 /seedemu_sniffer
 COPY 17ac2d812a99a91e7f747e1defb72a29 /seedemu_worker
-COPY carla/agents /carla/agents
+COPY agents /carla/agents
 COPY get_car.py /carla/get_car.py
 COPY refactor_automatic_control.py /carla/refactor_automatic_control.py
 COPY requirements.txt /carla/requirements.txt

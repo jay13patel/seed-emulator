@@ -129,6 +129,7 @@ class WebSocketClient:
 # -- Global functions ----------------------------------------------------------
 # ==============================================================================
 role_name = None
+destroy = False
 
 def find_weather_presets():
     """Method to find weather presets"""
@@ -574,6 +575,11 @@ def game_loop(args):
             world.player.apply_control(control)
     except Exception as e:
         print("Failed to connect to the CARLA server or get the traffic manager:", e)
+    except KeyboardInterrupt:
+        print("The simulation has been stopped by the user.")
+        world.destroy()
+        global destroy
+        destroy=True
 
 
     finally:
@@ -584,8 +590,8 @@ def game_loop(args):
             settings.fixed_delta_seconds = None
             world.world.apply_settings(settings)
             traffic_manager.set_synchronous_mode(True)
-
-            world.destroy()
+            if not destroy:
+                world.destroy()
 
 # ==============================================================================
 # -- main() --------------------------------------------------------------

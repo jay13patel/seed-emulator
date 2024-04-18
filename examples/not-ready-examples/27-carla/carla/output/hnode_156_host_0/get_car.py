@@ -8,14 +8,14 @@ import math
 
 
 parser = argparse.ArgumentParser(description=" Get your car information")
-parser.add_argument("--carla_ip", default="localhost", help="IP address of the CARLA server")
-parser.add_argument("--carla_port", default=2000, type=int, help="Port number of the CARLA server")
-parser.add_argument("--car_info", help="Get detailed info for a car based on its role name")
+parser.add_argument("--c_ip", default="localhost", help="IP address of the CARLA server")
+parser.add_argument("--c_port", default=2000, type=int, help="Port number of the CARLA server")
+parser.add_argument("--info", help="Get detailed info for a car based on its role name")
 
 args = parser.parse_args()
 
 async def get_vehicle_info(role_name):
-    client = carla.Client(args.carla_ip, args.carla_port)
+    client = carla.Client(args.c_ip, args.c_port)
     client.set_timeout(10.0)
     world = client.get_world()   
     try:
@@ -55,9 +55,9 @@ async def get_vehicle_info(role_name):
         print("Program terminated by user")
 
 if __name__ == "__main__":
-    if args.car_info:
+    if args.info:
         try:
-            asyncio.get_event_loop().run_until_complete(get_vehicle_info(args.car_info))
+            asyncio.get_event_loop().run_until_complete(get_vehicle_info(args.info))
             exit()
         except KeyboardInterrupt:
             print("Program terminated by user. Exiting gracefully.")
