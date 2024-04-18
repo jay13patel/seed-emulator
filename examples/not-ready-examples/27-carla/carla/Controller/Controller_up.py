@@ -63,7 +63,6 @@ def get_vehicle_roles():
 
 async def get_vehicle_info(role_name):
     # Get detailed information about a vehicle based on its role name
-    role_name= "seed" + args.c_info
     client = carla.Client(args.c_ip, args.c_port)
     client.set_timeout(10.0)
     world = client.get_world()   
@@ -73,7 +72,7 @@ async def get_vehicle_info(role_name):
             found = False
             for vehicle in vehicle_actors:
                 # Check if the vehicle matches the specified role name
-                if vehicle.attributes.get('role_name', '') == role_name:
+                if vehicle.attributes.get('role_name', '') == args.c_info:
                     # Get vehicle location
                     location = vehicle.get_location()
                     location_str = f"({location.x:.2f}, {location.y:.2f}, {location.z:.2f})"
