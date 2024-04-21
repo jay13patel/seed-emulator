@@ -9,7 +9,7 @@ CARLA Simulator is an open-source platform designed specifically for the develop
 
 The architecture of CARLA is based on a client-server model. The server manages the core simulation tasks, including the rendering of sensors, physics calculations, and maintaining the state of the world and its actors. This setup is ideal for achieving realistic results, especially when paired with a dedicated GPU to handle the intensive computations. On the client side, users interact with the simulation through a flexible API available in Python and C++. This API allows users to control vehicle behaviors, set environmental conditions, and integrate with external systems for more complex simulations.
 
-In essence, CARLA provides a comprehensive toolkit for anyone looking to advance the field of autonomous driving, offering tools for scenario creation, data collection, and system validation. Its open-source nature also encourages collaboration and innovation, making it a central hub for autonomous vehicle research.
+In essence, CARLA provides a comprehensive toolkit for anyone looking to advance the field of autonomous driving, offering tools for scenario creation, data collection, and system validation. Its open-source nature also encourages collaboration and innovation, making it a central hub for autonomous vehicle research. test
 
 ## Key Components of CARLA
 
