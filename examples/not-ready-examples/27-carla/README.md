@@ -1,4 +1,4 @@
-# CARLA Simulator Example1
+# CARLA Simulator Example2
 
 This is an example that demonstrates how to use the public key infrastructure (PKI) in the emulator.
 
