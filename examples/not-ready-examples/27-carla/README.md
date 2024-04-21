@@ -5,31 +5,39 @@ This manual provides comprehensive guidance on setting up, operating, and optimi
 
 ## What is CARLA Simulator
 
-CARLA Simulator is an open-source platform designed specifically for the development and testing of autonomous driving systems. It uses Unreal Engine, known for its powerful rendering capabilities, to create highly realistic urban environments. This allows researchers and developers to simulate and analyze various scenarios that autonomous vehicles might encounter. CARLA supports the ASAM OpenDRIVE standard to define roads and traffic settings, ensuring the environments are accurate and detailed.
+CARLA Simulator is an open-source platform designed specifically for the development and testing of autonomous driving systems. It uses Unreal Engine, known for its powerful rendering capabilities, to create highly realistic urban environments. This allows researchers and developers to simulate and analyze various scenarios that autonomous vehicles might encounter.
 
-The architecture of CARLA is based on a client-server model. The server manages the core simulation tasks, including the rendering of sensors, physics calculations, and maintaining the state of the world and its actors. This setup is ideal for achieving realistic results, especially when paired with a dedicated GPU to handle the intensive computations. On the client side, users interact with the simulation through a flexible API available in Python and C++. This API allows users to control vehicle behaviors, set environmental conditions, and integrate with external systems for more complex simulations.
+Read More: https://carla.readthedocs.io/en/latest/start_introduction/
 
-In essence, CARLA provides a comprehensive toolkit for anyone looking to advance the field of autonomous driving, offering tools for scenario creation, data collection, and system validation. Its open-source nature also encourages collaboration and innovation, making it a central hub for autonomous vehicle research. test
+## Key Components of CARLA Simulator
 
-## Key Components of CARLA
+The architecture of CARLA is based on a client-server model.
 
+![[Pasted image 20240421184832.png]]
 ### CARLA Server/World
 
-DNS infrastructure is required for the PKI infrastructure to work. The PKI infrastructure will consult the DNS infrastructure to resolve the domain names and verify the target node's control of domain in ACME challenges.
-
+In the CARLA Simulator setup, the server handles all the core tasks necessary for the simulation. This includes rendering the sensors, computing the physics to ensure realistic interactions within the simulated world, and updating the state of the world and its various actors. Given the demand for high-quality, realistic outputs, the server ideally runs on a dedicated GPU. This setup is particularly important as it helps in efficiently managing intensive tasks, thereby enhancing the fidelity and responsiveness of the simulation.
 ### CARLA Client
-To create a PKI infrastructure, we need to prepare the Root CA store. The Root CA store is abstracted as a class but it is essentially a folder living in the host machine's `/tmp` directory. The Root CA store is used to generate the corresponding Root CA certificate and private key at the build time. It is also possible to supply your own Root CA certificate and private key.
 
+CARLA clients represent the entities interacting with the simulation environment. These clients can be autonomous vehicles, Python programs, or any other entities controlling the logic of actors within the scene and setting world conditions. Leveraging the CARLA API, available in Python or C++, these clients communicate with the server to influence the simulation.
+
+Read More: https://carla.readthedocs.io/en/latest/foundations/#world-and-client
 ### Traffic Manager
 
-In this example, we use a web server to demonstrate how the PKI is used. 
-This is a simple web server that serves a static page. When this machine starts,
-it will request a certificate from the specified CA server, and use it to serve HTTPS requests.
+The Traffic Manager in CARLA Simulator acts as a built-in system that governs vehicles not involved in learning, orchestrating realistic behaviors to emulate urban environments accurately.
 
+Read More: https://carla.readthedocs.io/en/latest/ts_traffic_simulation_overview/#traffic-manager
 ### Synchronous and asynchronous mode
+
+In this mode, the client and server operate in lockstep, with the server waiting for the client to process each simulation step before proceeding to the next. This ensures determinism and precise control over the simulation but can lead to slower overall execution.
+
+Read More : https://carla.readthedocs.io/en/latest/foundations/#synchronous-and-asynchronous-mode
 
 ### Sensors
 
+In CARLA, sensors are vital for vehicles to gather information about their surroundings. These specialized actors, attached to vehicles, capture data such as camera images, radar readings, and lidar scans, aiding in simulation and analysis tasks.
+
+Read More: 
 
 ## CARLA Simulator + SEED Emulator 
 
