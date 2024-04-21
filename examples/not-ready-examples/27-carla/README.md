@@ -1,8 +1,6 @@
-# CARLA Simulator Example2
+# CARLA-SEED CoDrive
 
-This is an example that demonstrates how to use the public key infrastructure (PKI) in the emulator.
-
-In this example we create a PKI infrastructure on node `ca` with ACME support. All the nodes in the emulator will have this private CA root certificate installed. We will also create a web server on node `web` and request a certificate from the CA. The CA will sign the certificate and send it to the web server. The web server will then use this certificate to serve HTTPS requests.
+This manual provides comprehensive guidance on setting up, operating, and optimizing Carla-Seed CoDrive, ensuring you efficiently leverage both simulation and emulation to enhance your projects. From installation to advanced features, find all the information you need to effectively navigate and utilize this integrated platform.
 
 ## What is CARLA Simulator
 
