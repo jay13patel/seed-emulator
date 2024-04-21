@@ -28,4 +28,4 @@ client/backend/bin
 project-words.txt
 .venv
 .python-version
-.obsidian/**
+**/.obsidian/**
