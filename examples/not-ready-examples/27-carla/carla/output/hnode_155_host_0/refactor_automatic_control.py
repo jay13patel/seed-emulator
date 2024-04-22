@@ -581,7 +581,6 @@ def game_loop(args):
         global destroy
         destroy=True
 
-
     finally:
 
         if world is not None:

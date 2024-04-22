@@ -581,6 +581,8 @@ def game_loop(args):
         global destroy
         destroy=True
 
+    
+
 
     finally:
 

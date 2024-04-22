@@ -1,7 +1,7 @@
-# CARLA-SEED Co-Drive
+# CARLA-SEED 
 
 The Developer Manual offers detailed insights into project architecture, technical implementation, visualization, and future developments, as well as troubleshooting guidance. 
-## What is CARLA Simulator
+## Project Architecture
 
 CARLA Simulator is an open-source platform designed specifically for the development and testing of autonomous driving systems. It uses Unreal Engine, known for its powerful rendering capabilities, to create highly realistic urban environments. This allows researchers and developers to simulate and analyze various scenarios that autonomous vehicles might encounter.
 

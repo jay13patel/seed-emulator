@@ -1,4 +1,4 @@
-# CARLA-SEED
+# CARLA-SEED Example
 This manual provides comprehensive guidance on setting up, operating, and optimizing Carla-Seed, ensuring you efficiently leverage both simulation and emulation.
 ## Table of Contents
 - [CARLA-SEED](#carla-seed)
