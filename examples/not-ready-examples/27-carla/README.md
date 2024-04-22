@@ -47,12 +47,12 @@ Read More: https://carla.readthedocs.io/en/latest/foundations/#world-and-client
     - Go to [CARLA GitHub Page](https://github.com/carla-simulator/carla/blob/master/Docs/download.md).
 2. **Locate the Windows:**
     
-    - Find and click on the link for the Windows version of CARLA.
+    - Find and click on the link for the Windows version of CARLA Nighty Build.
 3. **Download and Unzip:**
     
     - Download the CARLA package for Windows.
     - Once downloaded, unzip the file to extract its contents.
-4. **Install pip3:**
+4. **Install  important pip3 packages:**
     
     - Open Command Prompt as an administrator.
     - Run the command  `pip3 install --user pygame numpy` to install Pygame and NumPy.
@@ -69,8 +69,45 @@ Read More: https://carla.readthedocs.io/en/latest/foundations/#world-and-client
 6. **Launch CARLA:**
     
     - Run the command `CarlaUE4.exe` to start CARLA.
+
+
+A window will appear displaying a view of the city. This is the spectator view. To navigate around the city, use the mouse and WASD keys. Hold down the right mouse button to control the direction.
+
+#### Linux Installation
+
+1. **Visit the CARLA GitHub Page:**
+    
+    - Go to [CARLA GitHub Page](https://github.com/carla-simulator/carla/blob/master/Docs/download.md).
+2. **Locate the Linux Version:**
+    
+    - Find and click on the link for the Linux version of CARLA.
+3. **Download and Unzip:**
+    
+    - Download the CARLA package for Linux.
+    - Once downloaded, unzip the file to extract its contents.
+4. **Install important pip3 packages:**
+    
+    - Open Terminal
+    - Run the command  `pip install --user pygame numpy && pip3 install --user pygame numpy` to install Pygame and NumPy.
+    - Additionally, install CARLA python package run this command `pip3 install carla`.
+        
+        
+        
+5. **Navigate to CARLA Root Directory:**
+    
+    - Use the `cd` command to navigate to the directory where CARLA was extracted. For example:
+        
+        bashCopy code
+        
+        `cd path/to/carla/root`
+        
+6. **Launch CARLA:**
+    
+    - Run the command `./CarlaUE4.sh` to start CARLA.
     - A window will appear displaying a view of the city. This is the spectator view.
     - To navigate around the city, use the mouse and WASD keys. Hold down the right mouse button to control the direction.
+
+Once launched, CARLA will open a window presenting a city view, known as the spectator view. To explore the city, utilize the mouse and WASD keys, with the right mouse button held to adjust direction. The server simulator is active, awaiting connection from a client to engage with the virtual world.
 
 
 
