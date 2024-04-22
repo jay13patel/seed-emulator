@@ -1,8 +1,6 @@
 # CARLA-SEED Co-Drive
 
-
-This manual provides comprehensive guidance on setting up, operating, and optimizing Carla-Seed Co-Drive, ensuring you efficiently leverage both simulation and emulation to enhance your projects. From installation to advanced features, find all the information you need to effectively navigate and utilize this integrated platform.
-
+The Developer Manual offers detailed insights into project architecture, technical implementation, visualization, and future developments, as well as troubleshooting guidance. 
 ## What is CARLA Simulator
 
 CARLA Simulator is an open-source platform designed specifically for the development and testing of autonomous driving systems. It uses Unreal Engine, known for its powerful rendering capabilities, to create highly realistic urban environments. This allows researchers and developers to simulate and analyze various scenarios that autonomous vehicles might encounter.

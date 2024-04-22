@@ -146,7 +146,7 @@ services:
             CARLA_IP: "128.230.114.88"
             CARLA_PORT: 2000
             ROLE_NAME: car1
-            CAMERA: on
+            CAMERA: off
             
 
         labels:
@@ -207,7 +207,7 @@ services:
             CARLA_IP: "128.230.114.88"
             CARLA_PORT: 2000
             ROLE_NAME: car2
-            CAMERA: on
+            CAMERA: off
 
 
         labels:
@@ -268,7 +268,7 @@ services:
             CARLA_IP: "128.230.114.88"
             CARLA_PORT: 2000
             ROLE_NAME: car3
-            CAMERA: on
+            CAMERA: off
 
         labels:
             org.seedsecuritylabs.seedemu.meta.asn: "154"
@@ -328,7 +328,7 @@ services:
             CARLA_IP: "128.230.114.88"
             CARLA_PORT: 2000
             ROLE_NAME: car4
-            CAMERA: on
+            CAMERA: off
         
         labels:
             org.seedsecuritylabs.seedemu.meta.asn: "155"
@@ -388,7 +388,7 @@ services:
             CARLA_IP: "128.230.114.88"
             CARLA_PORT: 2000
             ROLE_NAME: car5
-            CAMERA: on
+            CAMERA: off
         
 
         labels:
@@ -449,7 +449,7 @@ services:
             CARLA_IP: "128.230.114.88"
             CARLA_PORT: 2000
             ROLE_NAME: car6
-            CAMERA: on
+            CAMERA: off
 
 
         labels:
