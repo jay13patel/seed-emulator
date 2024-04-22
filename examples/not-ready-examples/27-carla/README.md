@@ -1,8 +1,6 @@
 # CARLA-SEED Co-Drive
 
-
 This manual provides comprehensive guidance on setting up, operating, and optimizing Carla-Seed Co-Drive, ensuring you efficiently leverage both simulation and emulation to enhance your projects. From installation to advanced features, find all the information you need to effectively navigate and utilize this integrated platform.
-
 ## What is CARLA Simulator
 
 CARLA Simulator is an open-source platform designed specifically for the development and testing of autonomous driving systems. It uses Unreal Engine, known for its powerful rendering capabilities, to create highly realistic urban environments. This allows researchers and developers to simulate and analyze various scenarios that autonomous vehicles might encounter.
@@ -22,30 +20,59 @@ In the CARLA Simulator setup, the server handles all the core tasks necessary fo
 CARLA clients represent the entities interacting with the simulation environment. These clients can be autonomous vehicles, Python programs, or any other entities controlling the logic of actors within the scene and setting world conditions. Leveraging the CARLA API, available in Python or C++, these clients communicate with the server to influence the simulation.
 
 Read More: https://carla.readthedocs.io/en/latest/foundations/#world-and-client
-### Traffic Manager
-
-The Traffic Manager in CARLA Simulator acts as a built-in system that governs vehicles not involved in learning, orchestrating realistic behaviors to emulate urban environments accurately.
-
-Read More: https://carla.readthedocs.io/en/latest/ts_traffic_simulation_overview/#traffic-manager
-### Synchronous and asynchronous mode
-
-In this mode, the client and server operate in lockstep, with the server waiting for the client to process each simulation step before proceeding to the next. This ensures determinism and precise control over the simulation but can lead to slower overall execution.
-
-Read More : https://carla.readthedocs.io/en/latest/foundations/#synchronous-and-asynchronous-mode
-
-### Sensors
-
-In CARLA, sensors are vital for vehicles to gather information about their surroundings. These specialized actors, attached to vehicles, capture data such as camera images, radar readings, and lidar scans, aiding in simulation and analysis tasks.
-
-Read More: 
 
 ## CARLA Simulator + SEED Emulator 
 
 ### Integration Architecture
 
-### System Requirements 
-
 ### CARLA Simulator Installation
+
+#### System Requirements for Carla Server
+- **Operating Systems:** Windows, Linux
+- **CPU:** Quad-core Intel or AMD, 2.5 GHz or faster
+- **RAM (Memory):** 
+	- Minimum: 16 GB 
+	- Recommended: 32 GB for optimal performance
+- **GPU:**
+    - Minimum: 6 GB RAM
+    - Recommended: 8 GB RAM for optimal performance
+    - Note: Dedicated GPU strongly recommended for machine learning
+- **Disk Space:** 20 GB free space
+- **Python:** Version 3.7 supported on both Windows and Linux
+- **Pip:** Version 20.3 or higher
+- **Network:** TCP ports 2000 and 2001 must be open
+
+#### Windows Installation
+1. **Visit the CARLA GitHub Page:**
+    - Go to [CARLA GitHub Page](https://github.com/carla-simulator/carla/blob/master/Docs/download.md).
+2. **Locate the Windows:**
+    
+    - Find and click on the link for the Windows version of CARLA.
+3. **Download and Unzip:**
+    
+    - Download the CARLA package for Windows.
+    - Once downloaded, unzip the file to extract its contents.
+4. **Install pip3:**
+    
+    - Open Command Prompt as an administrator.
+    - Run the command  `pip3 install --user pygame numpy` to install Pygame and NumPy.
+    - Additionally, install CARLA python package run this command `pip3 install carla`.
+5. **Navigate to CARLA Root Directory:**
+    
+    - Open Command Prompt.
+    - Use the `cd` command to navigate to the directory where CARLA was extracted. For example:
+        
+        bashCopy code
+        
+        `cd path\to\carla\root`
+        
+6. **Launch CARLA:**
+    
+    - Run the command `CarlaUE4.exe` to start CARLA.
+    - A window will appear displaying a view of the city. This is the spectator view.
+    - To navigate around the city, use the mouse and WASD keys. Hold down the right mouse button to control the direction.
+
+
 
 ### SEED Emulator Installation
 
