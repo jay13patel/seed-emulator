@@ -1,6 +1,12 @@
 # CARLA-SEED Co-Drive
 
 This manual provides comprehensive guidance on setting up, operating, and optimizing Carla-Seed Co-Drive, ensuring you efficiently leverage both simulation and emulation to enhance your projects. From installation to advanced features, find all the information you need to effectively navigate and utilize this integrated platform.
+
+## Table of Contents
+- [CARLA-SEED Co-Drive](#carla-seed-co-drive)
+  - [Table of Contents](#table-of-contents)
+  - [What is CARLA Simulator](#what-is-carla-simulator)
+
 ## What is CARLA Simulator
 
 CARLA Simulator is an open-source platform designed specifically for the development and testing of autonomous driving systems. It uses Unreal Engine, known for its powerful rendering capabilities, to create highly realistic urban environments. This allows researchers and developers to simulate and analyze various scenarios that autonomous vehicles might encounter.
@@ -11,7 +17,7 @@ Read More: https://carla.readthedocs.io/en/latest/start_introduction/
 
 The architecture of CARLA is based on a client-server model.
 
-![[Pasted image 20240421184832.png]]
+![[carla_arch.png]]
 ### CARLA Server/World
 
 In the CARLA Simulator setup, the server handles all the core tasks necessary for the simulation. This includes rendering the sensors, computing the physics to ensure realistic interactions within the simulated world, and updating the state of the world and its various actors. Given the demand for high-quality, realistic outputs, the server ideally runs on a dedicated GPU. This setup is particularly important as it helps in efficiently managing intensive tasks, thereby enhancing the fidelity and responsiveness of the simulation.
@@ -24,6 +30,10 @@ Read More: https://carla.readthedocs.io/en/latest/foundations/#world-and-client
 ## CARLA Simulator + SEED Emulator 
 
 ### Integration Architecture
+
+![[carlaseed_arch.png]]
+
+### System Requirements 
 
 ### CARLA Simulator Installation
 
@@ -113,8 +123,6 @@ Once launched, CARLA will open a window presenting a city view, known as the spe
 
 ### SEED Emulator Installation
 
-one
-
 ### Usage 
 ### Integration Features
 
@@ -132,4 +140,6 @@ A list of common problems that may arise when using the integration and their so
 #### Debugging Tips 
 
 Tips for diagnosing and fixing issues specific to the integration
+
+### Future Work 
 
