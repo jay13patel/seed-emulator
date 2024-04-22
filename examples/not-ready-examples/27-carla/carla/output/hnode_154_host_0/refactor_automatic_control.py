@@ -112,7 +112,7 @@ class WebSocketClient:
     async def check_and_notify_destination_reached(self):
         """Check if the destination is reached and notify the WebSocket server"""
         uri = f"ws://{self.ws_ip}:{self.ws_port}"
-        await asyncio.sleep(5)
+        #await asyncio.sleep(2)
         # Check every second, adjust as needed
         # Once done, send notification
         r_name = self.vehicle.attributes.get('role_name')

@@ -605,7 +605,7 @@ services:
     carlaviz:
         image: mjxu96/carlaviz:0.9.15
         network_mode: host
-        command: ["--simulator_host", "128.230.114.88", "--simulator_ego_vehicle_name", "seedcar_1"]     
+        command: ["--simulator_host", "128.230.114.88", "--simulator_ego_vehicle_name", "seedcar1"]     
         
 networks:
     net_150_net0:

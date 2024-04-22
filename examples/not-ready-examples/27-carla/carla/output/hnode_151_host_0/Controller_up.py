@@ -40,8 +40,9 @@ async def receive_notifications():
         async with websockets.connect(WEBSOCKET_URI) as websocket:
             async for message in websocket:
                 data = json.loads(message)
-                if data["type"] == "destination_reached":
-                    print(data["message"])
+                if data.get("message") is not None and "None" not in data["message"]:
+                    if data["type"] == "destination_reached":
+                        print(data["message"])
 
     except websockets.exceptions.ConnectionClosedError as e:
         print(f"Connection closed unexpectedly: {e}")
