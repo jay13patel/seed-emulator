@@ -17,7 +17,7 @@ Read More: https://carla.readthedocs.io/en/latest/start_introduction/
 
 The architecture of CARLA is based on a client-server model.
 
-![[carla_arch.png]]
+![carla_arch](carla_arch.png)
 ### CARLA Server/World
 
 In the CARLA Simulator setup, the server handles all the core tasks necessary for the simulation. This includes rendering the sensors, computing the physics to ensure realistic interactions within the simulated world, and updating the state of the world and its various actors. Given the demand for high-quality, realistic outputs, the server ideally runs on a dedicated GPU. This setup is particularly important as it helps in efficiently managing intensive tasks, thereby enhancing the fidelity and responsiveness of the simulation.
@@ -31,7 +31,7 @@ Read More: https://carla.readthedocs.io/en/latest/foundations/#world-and-client
 
 ### Integration Architecture
 
-![[carlaseed_arch.png]]
+![carlaseed arch](carlaseed_arch.png)
 
 ### System Requirements 
 
