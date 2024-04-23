@@ -52,11 +52,11 @@ For detailed usage, please refer to the CARLAVIZ documentation [here](https://gi
     - Open Command Prompt as an administrator.
     - Run the command to install Pygame and NumPy.
 	```python 
-	pip3 install --user pygame numpy	
+		pip3 install --user pygame numpy	
 	```
     - Additionally, install CARLA python package run this command.
     ```python
-	pip3 install carla
+		pip3 install carla
 	```
 5. **Navigate to CARLA Root Directory:**
     - Use the Command Prompt to move to the directory where CARLA was extracted.
@@ -78,8 +78,8 @@ For detailed usage, please refer to the CARLAVIZ documentation [here](https://gi
 4. **Install important pip3 packages:**
     - In Terminal, install Pygame and NumPy, and then the CARLA Python package.
     ```python
-	pip3 install --user pygame numpy 
-	pip3 install carla
+		pip3 install --user pygame numpy 
+		pip3 install carla
 	```
 5. **Navigate to CARLA Root Directory:**
     - Change directory to where you extracted CARLA.
