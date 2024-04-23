@@ -1,7 +1,7 @@
 # CARLA-SEED Example
 This manual provides comprehensive guidance on setting up, operating, and optimizing Carla-Seed, ensuring you efficiently leverage both simulation and emulation.
 ## Table of Contents
-- [CARLA-SEED](#carla-seed)
+- [CARLA-SEED](#carla-seed-example)
   - [Table of Contents](#table-of-contents)
   - [What is CARLA Simulator](#what-is-carla-simulator)
 ## What is CARLA Simulator
@@ -25,7 +25,7 @@ For detailed usage, please refer to the CARLAVIZ documentation [here](https://gi
 ### Integration Architecture
 
 ![carlaseed arch](carlaseed_arch.png)
-### System Requirements 
+
 ### CARLA Simulator Installation
 #### System Requirements for CARLA Server
 - **Operating Systems:** Windows, Linux
@@ -132,7 +132,7 @@ After installing CARLA Simulator, SEED Emulator, and setting up Carlaviz along w
     - Refresh the Carlaviz page (`http://localhost:8080`) and check for the visualization of spawned vehicles and any ongoing scenarios. Movement and interaction should reflect real-time simulation data.
 4. **Web Socket Server Check**: 
 	- 4. Verify the Web Socket server's functionality on `150/host_0` at `10.150.0.71:6789` by accessing it via the SEED Emulator's Internet Map dashboard.
-#### Installation Troubleshooting
+### Installation Troubleshooting
 - **No Vehicles in CARLA or Carlaviz:** Ensure that the SEED Emulator is running without errors. Check the terminal or command prompt for error messages. Revisit the `docker-compose.yml` file for any configuration issues.
 - **Dashboard/Visualization Not Loading:** Verify the server ports are not in use by another application and firewall settings allow traffic on ports 8080 and 8090.
 - **Scenario Not Progressing:** Check the connection between the SEED Emulator and CARLA. The emulator should properly configure scenario based on its script, which then should be visible in CARLA and Carlaviz.
