@@ -102,8 +102,12 @@ parser.add_argument("--c_port", default=2000, type=int, help="Port number of the
 ###### **WebSocket Port (--w_port)**
 - **Default**: `6789`
 - **Purpose**: Specifies the port number on which the WebSocket server is listening.
-- **Usage Example**:    
-    `--w_port 6789`
+- **Usage Example**: 
+    ```python 
+    --w_port 6789```
+
+
+
 ###### **CARLA Server IP (--c_ip)**
 - **Default**: `"localhost"`
 - **Purpose**: Specifies the IP address of the CARLA server.
