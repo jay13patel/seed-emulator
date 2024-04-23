@@ -399,109 +399,41 @@ This script provides a flexible setup to configure and control various aspects o
 #### **Rendering (--rendering)**
 - **Purpose**: Enables rendering in the CARLA(Carla Server) simulation.
 - **Usage Example**:
-   
 ```cmd
 --rendering
 ```
-
 #### **No Rendering (--no-rendering)**
-
 - **Purpose**: Disables rendering in the simulation(Carla Server).
 - **Usage Example**:
-    
-    bashCopy code
-    
-    `--no-rendering`
-    
-
+```cmd
+--no-rendering
+```
 #### **Disable Synchronous Mode (--no-sync)**
-
 - **Purpose**: Disables synchronous mode, allowing the simulation to run asynchronously.
 - **Usage Example**:
-    
-    bashCopy code
-    
-    `--no-sync`
-    
-
+```cmd
+--no-sync
+```
 #### **Weather (--weather)**
-
 - **Purpose**: Sets a weather preset; use `--list` to view available presets.
 - **Usage Example**:
-    
-    bashCopy code
-    
-    `--weather ClearNoon`
-    
-
+```cmd
+--weather ClearNoon
+```
 #### **Inspect (--inspect, -i)**
-
 - **Purpose**: Inspects the current simulation state and prints details.
 - **Usage Example**:
-    
-    bashCopy code
-    
-    `--inspect`
-    
-
+```cmd
+--inspect
+```
 #### **List Options (--list, -l)**
-
 - **Purpose**: Lists available maps, weather presets, and other configurable options.
 - **Usage Example**:
-    
-    bashCopy code
-    
-    `--list`
-    
 
-#### **List Blueprints (--list-blueprints, -b)**
+```cmd
+--list
+```
 
-- **Purpose**: Lists vehicle and actor blueprints that can be spawned in the simulation.
-- **Usage Example**:
-    
-    bashCopy code
-    
-    `--list-blueprints vehicle.*`
-    
-
-#### **XODR Path (--xodr-path)**
-
-- **Purpose**: Loads a map using an OpenDRIVE file.
-- **Usage Example**:
-    
-    bashCopy code
-    
-    `--xodr-path /path/to/map.xodr`
-    
-
-#### **OSM Path (--osm-path)**
-
-- **Purpose**: Converts OpenStreetMap data to a drivable OpenDRIVE map.
-- **Usage Example**:
-    
-    bashCopy code
-    
-    `--osm-path /path/to/map.osm`
-    
-
-#### **Tile Stream Distance (--tile-stream-distance)**
-
-- **Purpose**: Sets the tile streaming distance for large maps.
-- **Usage Example**:
-    
-    bashCopy code
-    
-    `--tile-stream-distance 500`
-    
-
-#### **Actor Active Distance (--actor-active-distance)**
-
-- **Purpose**: Sets the active distance for actors in large maps.
-- **Usage Example**:
-    
-    bashCopy code
-    
-    `--actor-active-distance 100`
 ### Integration Architecture
 
 ### System Requirements 
