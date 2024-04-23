@@ -1,4 +1,5 @@
 # CARLA-SEED 
+
 The Developer Manual offers detailed insights into project architecture, technical implementation, visualization, and future developments, as well as troubleshooting guidance. 
 ## Table of Contents
 - [CARLA-SEED](#carla-seed)
@@ -9,25 +10,6 @@ The Developer Manual offers detailed insights into project architecture, technic
 ### World and client
 
 The 'world' is the central element of the server that holds the simulation's state, and clients connect to it using the IP address (default: localhost) and port (default: 2000) to interact or modify the simulation.
-## Project Architecture
-
-CARLA Simulator is an open-source platform designed specifically for the development and testing of autonomous driving systems. It uses Unreal Engine, known for its powerful rendering capabilities, to create highly realistic urban environments. This allows researchers and developers to simulate and analyze various scenarios that autonomous vehicles might encounter.
-
-Read More: https://carla.readthedocs.io/en/latest/start_introduction/
-
-## Key Components of CARLA Simulator
-
-The architecture of CARLA is based on a client-server model.
-
-![[Pasted image 20240421184832.png]]
-### CARLA Server/World
-
-In the CARLA Simulator setup, the server handles all the core tasks necessary for the simulation. This includes rendering the sensors, computing the physics to ensure realistic interactions within the simulated world, and updating the state of the world and its various actors. Given the demand for high-quality, realistic outputs, the server ideally runs on a dedicated GPU. This setup is particularly important as it helps in efficiently managing intensive tasks, thereby enhancing the fidelity and responsiveness of the simulation.
-### CARLA Client
-
-CARLA clients represent the entities interacting with the simulation environment. These clients can be autonomous vehicles, Python programs, or any other entities controlling the logic of actors within the scene and setting world conditions. Leveraging the CARLA API, available in Python or C++, these clients communicate with the server to influence the simulation.
-
-Read More: https://carla.readthedocs.io/en/latest/foundations/#world-and-client
 ### Traffic Manager
 
 The Traffic Manager in CARLA Simulator acts as a built-in system that governs vehicles not involved in learning, orchestrating realistic behaviors to emulate urban environments accurately.
@@ -47,7 +29,7 @@ Read More: https://carla.readthedocs.io/en/latest/core_concepts/#4th-sensors-and
 ## Project Architecture
 
 
-![[architecture diagram (3).png]]
+![[architecture_diagram.png]]
 
 
 ### Base components of Architecture
@@ -80,14 +62,13 @@ The SEED Emulator acts like a virtual traffic system, simulating the network tha
 Although not depicted in the diagram, the CarlaViz container is an integral part of the Docker network. It offers a live visual feed of the simulation, enabling users to graphically track and analyze the movements and interactions of the vehicles within the CARLA Server environment. Its connectivity to the same network ensures seamless integration with the simulation data flow.
 
 ### Initialization Flow:
-![[Intialization Flow.png]]![[Intialization Flow 1.png]]
-
+![[Intialization Flow.png]]
 This flowchart details the process for a car container to establish a connection to the CARLA simulation world and to the WebSocket container. Initially, the car container sends two separate connection requests: one to the CARLA world and another to the WebSocket container. Both requests are relayed through the Internet Exchange, with the CARLA world request proceeding to the Internet Router and then to the CARLA Server, while the WebSocket request goes directly to the WebSocket Container. If the CARLA Server is running, it accepts the connection and sends a confirmation back to the car container via the Internet Router, establishing a continuous sensory data feed. Conversely, if the WebSocket Container is not running, the connection request is refused. Otherwise, the connection is accepted. Once the car container is successfully connected, it processes the data from the CARLA Server, makes decisions based on that data, and then sends the decisions back to the CARLA Server. Meanwhile, it connects to the webserver, listens on a port, and waits for any instructions from the Controller, completing the initialization process and being ready for interactive simulation.
 
 ### Setting a destination Workflow:
 
 
-![[_Setting a Destination Workflow_ .png]]
+![[_Setting a Destination Workflow.png]]
 
 
 The diagram outlines the workflow for setting a destination in a vehicle simulation system. The process begins with the Controller Container, which sends a destination to the WebSocket Container. This request is routed through the Internet Exchange to the WebSocket Container, which checks if the destination is meant for one car or all cars. If it’s for one car, the WebSocket sends the information to that specific car. If it’s for all cars, the WebSocket broadcasts the destination to every car container. Once the correct car or cars receive the request, they set the new destination. As a car reaches the destination, it sends a notification back through the WebSocket Container. Finally, the Controller receives a notification that confirms the car's arrival at the specified location. This workflow ensures that destination commands are accurately communicated and acknowledged within the system.
