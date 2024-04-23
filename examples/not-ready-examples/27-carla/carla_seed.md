@@ -81,14 +81,14 @@ This flowchart details the process for a car container to establish a connection
 The diagram outlines the workflow for setting a destination in a vehicle simulation system. The process begins with the Controller Container, which sends a destination to the WebSocket Container. This request is routed through the Internet Exchange to the WebSocket Container, which checks if the destination is meant for one car or all cars. If it’s for one car, the WebSocket sends the information to that specific car. If it’s for all cars, the WebSocket broadcasts the destination to every car container. Once the correct car or cars receive the request, they set the new destination. As a car reaches the destination, it sends a notification back through the WebSocket Container. Finally, the Controller receives a notification that confirms the car's arrival at the specified location. This workflow ensures that destination commands are accurately communicated and acknowledged within the system.
 ### Technical Implementation:
 #### Controller.py
-#### **Command Line Argument Details**
+##### **Command Line Argument Details**
 
 **WebSocket and CARLA Server Configurations**: The script allows configuration of IP addresses and port numbers for both the WebSocket and CARLA servers to establish connections. This is crucial for environments where the servers may not run on default settings or local hosts.
 
-`parser.add_argument("--w_ip", default="localhost", help="IP address of the WebSocket server") 
-`parser.add_argument("--w_port", default="6789", help="Port number of the WebSocket server") 
-`parser.add_argument("--c_ip", default="localhost", help="IP address of the CARLA server") 
-`parser.add_argument("--c_port", default=2000, type=int, help="Port number of the CARLA server")
+`parser.add_argument("--w_ip", default="localhost", help="IP address of the WebSocket server") `
+`parser.add_argument("--w_port", default="6789", help="Port number of the WebSocket server") `
+`parser.add_argument("--c_ip", default="localhost", help="IP address of the CARLA server") `
+`parser.add_argument("--c_port", default=2000, type=int, help="Port number of the CARLA server")`
 
 ##### Arguments information
 ###### WebSocket IP (--w_ip)**
@@ -137,7 +137,7 @@ The diagram outlines the workflow for setting a destination in a vehicle simulat
 `async def set_destination(location_name, id="all")`
 
 ###### **Define Destination Data**:
-    `destination = {"type": "set_destination", "location_name": location_name, "car_id": id}`
+    destination = {"type": "set_destination", "location_name": location_name, "car_id": id}
     
 **Purpose**: Constructs a JSON object containing the type of request, the destination location, and the car ID, preparing it for transmission.
 
