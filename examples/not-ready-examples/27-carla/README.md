@@ -77,9 +77,9 @@ For detailed usage, please refer to the CARLAVIZ documentation [here](https://gi
 	```
 4. **Install important pip3 packages:**
     - In Terminal, install Pygame and NumPy, and then the CARLA Python package.
-    ```bash
-	    pip3 install --user pygame numpy 
-	    pip3 install carla
+    ```python
+	pip3 install --user pygame numpy 
+	pip3 install carla
 	```
 5. **Navigate to CARLA Root Directory:**
     - Change directory to where you extracted CARLA.
