@@ -97,7 +97,8 @@ parser.add_argument("--c_port", default=2000, type=int, help="Port number of the
 - **Default**: `"localhost"`
 - **Purpose**: Specifies the IP address of the WebSocket server.
 - **Usage Example**:
-    `--w_ip 192.168.1.1`
+	```python 
+	  --w_ip 192.168.1.1 ```
 ###### **WebSocket Port (--w_port)**
 - **Default**: `6789`
 - **Purpose**: Specifies the port number on which the WebSocket server is listening.
