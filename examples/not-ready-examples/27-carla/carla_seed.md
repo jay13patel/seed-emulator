@@ -89,8 +89,7 @@ parser.add_argument("--w_ip", default="localhost", help="IP address of the WebSo
 parser.add_argument("--w_port", default="6789", help="Port number of the WebSocket server") `
 parser.add_argument("--c_ip", default="localhost", help="IP address of the CARLA server") `
 parser.add_argument("--c_port", default=2000, type=int, help="Port number of the CARLA server")`
-python```
-
+```
 
 
 ##### Arguments information
