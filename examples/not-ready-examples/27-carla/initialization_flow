@@ -1,0 +1,22 @@
+// Initialization Flow
+digraph {
+	A [label="Car 1
+automatic.control.py"]
+	B [label="Carla World
+Internet Exchange"]
+	C [label="Internet Router"]
+	D [label="CARLA Server
+(Remote)"]
+	E [label=WebSocket]
+	F [label=Controller]
+	G [label="World
+Sensory Feed"]
+	A -> B [label="Connect Request"]
+	B -> C [label="To Internet Router"]
+	C -> D [label="To Remote Server"]
+	A -> E [label="WebSocket Connect"]
+	F -> E [label="Send Instructions"]
+	D -> A [label="Deploy Confirmation"]
+	G -> A [label="Sensory Data"]
+	A -> D [label="Decision Making (e.g., Stop at red light)"]
+}
