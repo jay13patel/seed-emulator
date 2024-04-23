@@ -97,46 +97,57 @@ parser.add_argument("--c_port", default=2000, type=int, help="Port number of the
 - **Default**: `localhost`
 - **Purpose**: Specifies the IP address of the WebSocket server.
 - **Usage Example**:
-	```python 
-	  --w_ip 192.168.1.1 ```
+	```cmd
+	 --w_ip 192.168.1.1 
+	 ```
 ###### **WebSocket Port (--w_port)**
 - **Default**: `6789`
 - **Purpose**: Specifies the port number on which the WebSocket server is listening.
 - **Usage Example**: 
-    ```python 
-    --w_port 6789```
-
-
-
+    ```cmd
+    -- w_port 6789
+    ```
 ###### **CARLA Server IP (--c_ip)**
 - **Default**: `"localhost"`
 - **Purpose**: Specifies the IP address of the CARLA server.
 - **Usage Example**:
-    `--c_ip 192.168.1.2`
+    ```cmd
+	--c_ip 192.168.1.2
+	```
 ###### **CARLA Server Port (--c_port)**
 - **Default**: `2000`
 - **Purpose**: Specifies the port number on which the CARLA server is listening.
-- **Usage Example**:    
-    `--c_port 2000`
+- **Usage Example**:  
+    ```cmd
+	--c_port 2000
+	```
 ##### **Location (--location)**
 - **Default**: `"Townhall"`
 - **Purpose**: Specifies a predefined location name to set as the destination for the vehicle(s).
 - **Predefined Options**: `"Townhall"`, `"Museum"`, `"Hotel"`, `"Basketballcourt"`, `"Skateboardpark"`
 - **Usage Example**:
-    `--location Museum`
+    ```cmd
+	--location Museum
+	```
 ##### **Vehicle Identifier (--id)**
 - **Default**: `"all"`
 - **Purpose**: Specifies the identifier for the vehicle to which the location will be sent or `"all"` to send to all vehicles.
 - **Usage Example**:
-    `--id vehicle123`
+    ```cmd
+	--id carlaseed1
+	```
 ##### **List Cars (--list)**
 - **Purpose**: When this flag is used, the script will list all vehicle role names and exit.
 - **Usage Example**:
-    `--list`
+    ```cmd
+	--list
+	```
 ##### **Car Info (--c_info)**
 - **Purpose**: Retrieves detailed information for a specific car based on its role name.
 - **Usage Example**:
-    `--c_info role123`
+    ```cmd
+	--c_info role123
+	```
 #### **Destination Management**
 
 - **Setting and Broadcasting Destinations**: The script provides functionality to set a destination for a specific vehicle or all vehicles, which is crucial for tests involving navigation and route planning. The destination is sent via WebSocket, ensuring that it reaches all relevant clients connected to the server.
@@ -163,10 +174,30 @@ parser.add_argument("--c_port", default=2000, type=int, help="Port number of the
 
 - **Listening for Status Updates**: This function listens for notifications such as 'destination reached', allowing the script to handle real-time updates about vehicle states which are essential for monitoring the progress of navigation tasks.
 
+`async def receive_notifications():`
+**Receiving Messages:**
+    
+    pythonCopy code
+    
+    `message = await websocket.recv()`
+    
+    **Purpose**: Suspends the function to wait for and receive a message from the WebSocket server.
+
+
+
 pythonCopy code
 
-`async def receive_notifications():`
+`if data['type'] == 'destination_reached':`
 
+**Purpose**: Checks if the received message indicates that a vehicle has reached its designated destination, triggering specific actions based on this event.
+
+1. **Parsing JSON Message:**
+    
+    pythonCopy code
+    
+    `data = json.loads(message)`
+    
+    **Purpose**: Converts the received JSON string into a Python dictionary for easy data manipulation.
 #### **Asynchronous Execution and Signal Handling**
 
 - **Handling User Interruptions**: The script is equipped to handle unexpected terminations gracefully, ensuring that all operations are concluded properly without leaving processes hanging, which is vital for maintaining the integrity of the simulation environment.
