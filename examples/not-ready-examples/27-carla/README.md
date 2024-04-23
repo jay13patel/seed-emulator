@@ -174,5 +174,6 @@ A list of common problems that may arise when using the integration and their so
 
 Tips for diagnosing and fixing issues specific to the integration
 
+### FAQ's
 ### Future Work 
 
