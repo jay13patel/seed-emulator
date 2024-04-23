@@ -92,11 +92,11 @@ For detailed usage, please refer to the CARLAVIZ documentation [here](https://gi
 ![carla_server](carla_server.png)
 Upon launching CARLA, a window showcasing a cityscape in spectator mode appears; navigate using the mouse and WASD keys, with the right mouse button for directional control, as the server awaits client connections for interactive simulation.
 ### SEED Emulator Installation
-#### Install the necessary software
+1. **Install the necessary software**
 To run the emulator, you need to install `docker`, `docker-compose`, and `python3`
-#### Set up the environment variable
+2. **Set up the environment variable**
 To run the emulator code, you need to add this folder to the `PYTHONPATH` environment variable. This can be done by running `source development.env` inside the project's root directory.
-#### Run SEED Emulator
+3. **Run SEED Emulator**
 Build and run the pre-generated containers. First `cd output/`, then do `docker-compose build && docker-compose up`. The emulator will start running.
 
 ![carlaseed](carlaseed.png)
