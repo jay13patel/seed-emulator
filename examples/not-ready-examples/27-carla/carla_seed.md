@@ -7,7 +7,7 @@ The Developer Manual offers detailed insights into project architecture, technic
   - [Core Concepts](#core-concepts)
   - [Project Architecture](#project-architecture)
 	  - [Base components of Architecture](#base-components-of-architecture)
-      - [Initilization Work Flow](#initialization-flow)
+      - [Initialization Work Flow](#initialization-flow)
 	  -  [Setting a destination Workflow](#setting-a-destination-workflow)
   - [Technical Implementation](#technical-implementation)
 	  - [Controller.py](#controllerpy)
@@ -88,12 +88,12 @@ The diagram outlines the workflow for setting a destination in a vehicle simulat
 parser.add_argument("--w_ip", default="localhost", help="IP address of the WebSocket server") `
 parser.add_argument("--w_port", default="6789", help="Port number of the WebSocket server") `
 parser.add_argument("--c_ip", default="localhost", help="IP address of the CARLA server") `
-parser.add_argument("--c_port", default=2000, type=int, help="Port number of the CARLA server")`
+parser.add_argument("--c_port", d- ￼￼Code Snippet￼￼:efault=2000, type=int, help="Port number of the CARLA server")`
 ```
 
 
 ##### Arguments information
-###### WebSocket IP (--w_ip)**
+###### **WebSocket IP (--w_ip)**
 - **Default**: `localhost`
 - **Purpose**: Specifies the IP address of the WebSocket server.
 - **Usage Example**:
@@ -151,98 +151,127 @@ parser.add_argument("--c_port", default=2000, type=int, help="Port number of the
 #### **Destination Management**
 
 - **Setting and Broadcasting Destinations**: The script provides functionality to set a destination for a specific vehicle or all vehicles, which is crucial for tests involving navigation and route planning. The destination is sent via WebSocket, ensuring that it reaches all relevant clients connected to the server.
-
-`async def set_destination(location_name, id="all")`
-
+**Function Name:**
+```python
+async def set_destination(location_name, id="all")
+```
 ###### **Define Destination Data**:
-    destination = {"type": "set_destination", "location_name": location_name, "car_id": id}
-    
+```python
+destination = {"type": "set_destination", "location_name": location_name, "car_id": id}
+    ```
 **Purpose**: Constructs a JSON object containing the type of request, the destination location, and the car ID, preparing it for transmission.
-
-**Establish WebSocket Connection**:
-    `async with websockets.connect(WEBSOCKET_URI) as websocket:`
-    
+###### Establish Web Socket Connection:
+```python
+async with websockets.connect(WEBSOCKET_URI) as websocket
+```
 **Purpose**: Opens a WebSocket connection using the previously constructed URI, enabling real-time data transfer.
 
- **Send Destination Data**:
-    `await websocket.send(json.dumps(destination))`
-    
+ ##### **Send Destination Data**:
+```python
+await websocket.send(json.dumps(destination))
+```
 **Purpose**: Sends the JSON-encoded destination data over the WebSocket connection to the server, which then communicates it to the designated vehicle(s).
-
-
 #### **Notification Handling**
 
-- **Listening for Status Updates**: This function listens for notifications such as 'destination reached', allowing the script to handle real-time updates about vehicle states which are essential for monitoring the progress of navigation tasks.
-
-`async def receive_notifications():`
-**Receiving Messages:**
-    
-    pythonCopy code
-    
-    `message = await websocket.recv()`
-    
-    **Purpose**: Suspends the function to wait for and receive a message from the WebSocket server.
-
-
-
-pythonCopy code
-
-`if data['type'] == 'destination_reached':`
-
+##### **Listening for Status Updates**: 
+This function listens for notifications such as 'destination reached', allowing the script to handle real-time updates about vehicle states which are essential for monitoring the progress of navigation tasks.
+**Function Name:**
+```python
+async def receive_notifications()
+```
+##### Receiving Messages:
+```python
+message = await websocket.recv()
+```
+**Purpose**: Suspends the function to wait for and receive a message from the WebSocket server.
+##### Checking Mechanism:
+```python 
+if data['type'] == 'destination_reached'
+```
 **Purpose**: Checks if the received message indicates that a vehicle has reached its designated destination, triggering specific actions based on this event.
 
-1. **Parsing JSON Message:**
-    
-    pythonCopy code
-    
-    `data = json.loads(message)`
-    
-    **Purpose**: Converts the received JSON string into a Python dictionary for easy data manipulation.
-#### **Asynchronous Execution and Signal Handling**
+##### Parsing JSON Message:
 
-- **Handling User Interruptions**: The script is equipped to handle unexpected terminations gracefully, ensuring that all operations are concluded properly without leaving processes hanging, which is vital for maintaining the integrity of the simulation environment.
+```python
+data = json.loads(message)
+```
+**Purpose**: Converts the received JSON string into a Python dictionary for easy data manipulation.
+#### **Asynchronous Execution 
+##### Asynchronous Functions
+```python 
+async def set_destination(location_name, id="all")
+async def receive_notifications()
+async def get_vehicle_info(role_name)
+```
+Purpose**: Marks the function as a coroutine, enabling it to perform non-blocking operations and efficiently manage asynchronous tasks like network communication and data processing.
+##### **Running Asynchronous Tasks**
 
-pythonCopy code
-
-`if __name__ == "__main__":`
-
+``` python
+```if __name__ == "__main__":  asyncio.get_event_loop().run_until_complete(set_destination(location_name,args.id)) 
+asyncio.get_event_loop().run_until_complete(receive_notifications())
+```
+**Purpose**: This section manages the execution of asynchronous tasks when the script runs directly. `run_until_complete` is used to initiate and run the tasks to completion. It orchestrates the start, execution, and orderly conclusion of asynchronous operations, ensuring that they complete before the script exits.
 #### **Predefined Locations and Navigation**
 
+```python
+locations = {"Townhall": (112.705, 9.616, 0.605), 
+	"Museum": (-115.36235046386719, 11.285353660583496, 1.249739170074463),
+	"Hotel": (-3.092482805252075, -67.59429931640625, 0.872872531414032),
+	"Basketballcourt": (-40.11349105834961, 109.1531982421875, 0.16197647154331207),
+	"Skateboardpark": (-89.92167663574219, 131.5748748779297, 1.4565911293029785)}
+````
 - **Utilization of Predefined Locations**: Maps predefined location names to their coordinates within the CARLA environment, facilitating easy setting of destinations for vehicles. This feature supports simulations that require vehicles to navigate to specific points.
-
-pythonCopy code
-
-`locations = {"Townhall": (112.705, 9.616, 0.605), ...}`
-
-#### **Error Handling and Validations**
-
-- **Robust Error Checks**: The script includes checks for valid location names and handles connection errors robustly, ensuring that any misconfiguration or server issues are reported clearly to the user.
-
-pythonCopy code
-
-`if args.location and args.location in locations:     ... else:     print("Invalid location name provided or no location name provided. Exiting.")`
-#### **Construct WebSocket URI**
-
+#### **Construct Web Socket URL**
+```python
+WEBSOCKET_URI = f"ws://{args.w_ip}:{args.w_port}"
+```
 - **Purpose**: Build the URI needed to connect to the WebSocket using command-line-provided IP and port.
-- **Code Snippet**:
-    `WEBSOCKET_URI = f"ws://{args.w_ip}:{args.w_port}"`
-
-
-
-
 #### **Get Vehicle Roles Function**
-- **Purpose**: Fetch and display the roles and IDs of all vehicles present in the simulation, useful for targeting commands.
-- **Code Snippet**:
-    `def get_vehicle_roles():`
 
-#### **Get Vehicle Info Function**
+```python
+def get_vehicle_roles():
+Creating a CARLA Client```
+**Purpose**: Fetch and display the roles and IDs of all vehicles present in the simulation, useful for targeting commands.
+##### **Creating a CARLA Client**
+```python
+client = carla.Client(args.c_ip, args.c_port)
+```
 
+**Purpose**: Initializes a connection to the CARLA server using the provided IP address and port number, setting up the client to interact with the simulation environment.
+
+##### **Getting the World**:
+```python 
+    world = client.get_world()
+    ```
+
+**Purpose**: Retrieves the world from the CARLA server which contains all the dynamic elements, like vehicles and sensors, facilitating access to further simulation data.
+##### **Filtering Vehicle Actors**:
+```python 
+vehicle_actors = world.get_actors().filter('vehicle.*')
+```
+**Purpose**: Retrieves all actors from the simulation that match the vehicle pattern, ensuring the function focuses only on vehicle entities for role extraction.
+##### Iterating and Printing Vehicle Roles:
+```python 
+for vehicle in vehicle_actors:     
+	role_name = vehicle.attributes.get('role_name', 'Unknown')     
+		if role_name.startswith('seed'):         
+			print(f"Vehicle {vehicle.id} with role: {role_name}")`
+    ```
+    
+**Purpose**: Iterates through each vehicle actor, extracts the role name attribute, and prints it. The filtering condition checks if the role name starts with 'seed', allowing for specific output customization or filtering based on predefined conditions.
+
+##### Get Vehicle Info Function
+```python
+async def get_vehicle_info(role_name):
+```
 - **Purpose**: Obtain and print detailed data about a specific vehicle based on its role name, including real-time location and movement parameters.
-- **Code Snippet**:
-    
-    pythonCopy code
-    
-	    `async def get_vehicle_info(role_name):`
+##### Retrieving and Calculating Vehicle Speed:
+```python
+`speed_kmh = 3.6 * math.sqrt(velocity.x**2 + velocity.y**2 + velocity.z**2)
+```
+**Purpose**: Calculates the speed of the vehicle in kilometers per hour from its velocity vector, providing a crucial metric for assessing vehicle performance in real-time.
+
+#### Webserver.py
 
 ### Integration Architecture
 
