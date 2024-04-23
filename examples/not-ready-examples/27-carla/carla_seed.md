@@ -7,8 +7,8 @@ The Developer Manual offers detailed insights into project architecture, technic
   - [Core Concepts](#core-concepts)
   - [Project Architecture](#project-architecture)
 	  - [Base components of Architecture](#base-components-of-architecture)
-      - [Initilization Work Flow](#base-components-of-architecture)
-	  -  [Setting a destination Workflow](#base-components-of-architecture)
+      - [Initilization Work Flow](#initialization-flow)
+	  -  [Setting a destination Workflow](#setting-a-destination-workflow)
   - [Technical Implementation](#technical-implementation)
 	  - [Controller.py](#controllerpy)
 	
