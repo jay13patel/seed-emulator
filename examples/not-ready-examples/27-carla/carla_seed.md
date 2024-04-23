@@ -258,7 +258,6 @@ for vehicle in vehicle_actors:
 		if role_name.startswith('seed'):         
 			print(f"Vehicle {vehicle.id} with role: {role_name}")`
     ```
-    
 **Purpose**: Iterates through each vehicle actor, extracts the role name attribute, and prints it. The filtering condition checks if the role name starts with 'seed', allowing for specific output customization or filtering based on predefined conditions.
 
 ##### Get Vehicle Info Function
