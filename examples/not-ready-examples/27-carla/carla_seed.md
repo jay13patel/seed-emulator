@@ -3,9 +3,9 @@
 The Developer Manual offers detailed insights into project architecture, technical implementation, visualization, and future developments, as well as troubleshooting guidance. 
 ## Table of Contents
 - [CARLA-SEED](#carla-seed)
-  - [Table of Contents](#Table of Contents)
-  - [Core Concepts](##Core concepts)
-  - [Project Architecture](##Project Architecture)
+  - [Table of Contents](#table-of-contents)
+  - [Core Concepts](#core-concepts)
+  - [Project Architecture](#project-architecture)
 ## Core concepts
 ### World and client
 
