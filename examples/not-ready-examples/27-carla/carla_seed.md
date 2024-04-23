@@ -159,7 +159,7 @@ async def set_destination(location_name, id="all")
 ###### **Define Destination Data**:
 ```python
 destination = {"type": "set_destination", "location_name": location_name, "car_id": id}
-    ```
+ ```
 **Purpose**: Constructs a JSON object containing the type of request, the destination location, and the car ID, preparing it for transmission.
 ###### Establish Web Socket Connection:
 ```python
@@ -220,7 +220,7 @@ locations = {"Townhall": (112.705, 9.616, 0.605),
 	"Hotel": (-3.092482805252075, -67.59429931640625, 0.872872531414032),
 	"Basketballcourt": (-40.11349105834961, 109.1531982421875, 0.16197647154331207),
 	"Skateboardpark": (-89.92167663574219, 131.5748748779297, 1.4565911293029785)}
-````
+	````
 - **Utilization of Predefined Locations**: Maps predefined location names to their coordinates within the CARLA environment, facilitating easy setting of destinations for vehicles. This feature supports simulations that require vehicles to navigate to specific points.
 #### **Construct Web Socket URL**
 ```python
@@ -231,7 +231,7 @@ WEBSOCKET_URI = f"ws://{args.w_ip}:{args.w_port}"
 
 ```python
 def get_vehicle_roles():
-Creating a CARLA Client```
+```
 **Purpose**: Fetch and display the roles and IDs of all vehicles present in the simulation, useful for targeting commands.
 ##### **Creating a CARLA Client**
 ```python
@@ -242,8 +242,8 @@ client = carla.Client(args.c_ip, args.c_port)
 
 ##### **Getting the World**:
 ```python 
-    world = client.get_world()
-    ```
+world = client.get_world()
+```
 
 **Purpose**: Retrieves the world from the CARLA server which contains all the dynamic elements, like vehicles and sensors, facilitating access to further simulation data.
 ##### **Filtering Vehicle Actors**:
@@ -257,7 +257,7 @@ for vehicle in vehicle_actors:
 	role_name = vehicle.attributes.get('role_name', 'Unknown')     
 		if role_name.startswith('seed'):         
 			print(f"Vehicle {vehicle.id} with role: {role_name}")`
-    ```
+```
 **Purpose**: Iterates through each vehicle actor, extracts the role name attribute, and prints it. The filtering condition checks if the role name starts with 'seed', allowing for specific output customization or filtering based on predefined conditions.
 
 ##### Get Vehicle Info Function
@@ -267,10 +267,9 @@ async def get_vehicle_info(role_name):
 - **Purpose**: Obtain and print detailed data about a specific vehicle based on its role name, including real-time location and movement parameters.
 ##### Retrieving and Calculating Vehicle Speed:
 ```python
-`speed_kmh = 3.6 * math.sqrt(velocity.x**2 + velocity.y**2 + velocity.z**2)
+speed_kmh = 3.6 * math.sqrt(velocity.x**2 + velocity.y**2 + velocity.z**2)
 ```
 **Purpose**: Calculates the speed of the vehicle in kilometers per hour from its velocity vector, providing a crucial metric for assessing vehicle performance in real-time.
-
 #### Webserver.py
 
 ### Integration Architecture
