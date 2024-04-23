@@ -11,7 +11,7 @@ The Developer Manual offers detailed insights into project architecture, technic
 	  -  [Setting a destination Workflow](#setting-a-destination-workflow)
   - [Technical Implementation](#technical-implementation)
 	  - [Controller.py](#controllerpy)
-	  - [Webserver.py](webserverpy)
+	  - [Webserver.py](#webserverpy)
 	
 ## Core concepts
 ### World and client
@@ -197,14 +197,14 @@ if data['type'] == 'destination_reached'
 data = json.loads(message)
 ```
 **Purpose**: Converts the received JSON string into a Python dictionary for easy data manipulation.
-#### **Asynchronous Execution 
+#### Asynchronous Execution 
 ##### Asynchronous Functions
 ```python 
 async def set_destination(location_name, id="all")
 async def receive_notifications()
 async def get_vehicle_info(role_name)
 ```
-Purpose**: Marks the function as a coroutine, enabling it to perform non-blocking operations and efficiently manage asynchronous tasks like network communication and data processing.
+**Purpose**: Marks the function as a coroutine, enabling it to perform non-blocking operations and efficiently manage asynchronous tasks like network communication and data processing.
 ##### **Running Asynchronous Tasks**
 
 ``` python
@@ -221,7 +221,7 @@ locations = {"Townhall": (112.705, 9.616, 0.605),
 	"Basketballcourt": (-40.11349105834961, 109.1531982421875, 0.16197647154331207),
 	"Skateboardpark": (-89.92167663574219, 131.5748748779297, 1.4565911293029785)}
 	````
-- **Utilization of Predefined Locations**: Maps predefined location names to their coordinates within the CARLA environment, facilitating easy setting of destinations for vehicles. This feature supports simulations that require vehicles to navigate to specific points.
+**Purpose**: Maps predefined location names to their coordinates within the CARLA environment, facilitating easy setting of destinations for vehicles. This feature supports simulations that require vehicles to navigate to specific points.
 #### **Construct Web Socket URL**
 ```python
 WEBSOCKET_URI = f"ws://{args.w_ip}:{args.w_port}"
@@ -271,6 +271,33 @@ speed_kmh = 3.6 * math.sqrt(velocity.x**2 + velocity.y**2 + velocity.z**2)
 ```
 **Purpose**: Calculates the speed of the vehicle in kilometers per hour from its velocity vector, providing a crucial metric for assessing vehicle performance in real-time.
 #### Webserver.py
+
+This server is set up to dynamically accept WebSocket connections, manage messages related to vehicle destinations and updates, and maintain a list of connected clients to facilitate message broadcasting.
+
+##### **Command Line Argument Details**
+
+The script allows for the dynamic configuration of IP addresses and port numbers for the WebSocket server, facilitating the customization necessary for various network environments.
+```python
+parser.add_argument("--ws_ip", default="localhost", help="IP address of the WebSocket server") 
+parser.add_argument("--ws_port", default=6789, type=int, help="Port number of the WebSocket server")
+```
+
+##### Arguments Information
+###### **Web Socket Server IP (--ws_ip)**
+- **Default**: `localhost`
+- **Purpose**: Specifies the IP address where the WebSocket server will listen for incoming connections.
+- **Usage Example**:
+```cmd
+--ws_ip 192.168.1.100
+```
+###### **Web Socket Server Port (--ws_port)**
+- **Default**: `6789`
+- **Purpose**: Defines the port number on which the WebSocket server will accept connections.
+- **Usage Example**:
+```cmd
+--ws_port 8080
+```
+
 
 ### Integration Architecture
 
