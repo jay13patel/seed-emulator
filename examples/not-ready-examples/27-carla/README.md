@@ -90,7 +90,6 @@ For detailed usage, please refer to the CARLAVIZ documentation [here](https://gi
     - Run the command `./CarlaUE4.sh` to start CARLA.
 
 ![carla_server](carla_server.png)
-
 Upon launching CARLA, a window showcasing a cityscape in spectator mode appears; navigate using the mouse and WASD keys, with the right mouse button for directional control, as the server awaits client connections for interactive simulation.
 ### SEED Emulator Installation
 #### Install the necessary software
@@ -104,14 +103,14 @@ Build and run the pre-generated containers. First `cd output/`, then do `docke
 
 ### SEED Emulator Container Terminology
 - **Web Socket Server**: `hnode_150_host_0` - Manages Web Socket services for real-time communication.
-- **Controller**: `hnode_151_host_0` - Handles control logic for simulations.
-- **Seed Car 1**: `hnode_152_host_0` - Represents the first autonomous vehicle in the simulation.
-- **Seed Car 2**: `hnode_153_host_0` - Represents the second autonomous vehicle.
-- **Seed Car 3**: `hnode_154_host_0` - Represents the third autonomous vehicle.
-- **Seed Car 4**: `hnode_155_host_0` - Represents the fourth autonomous vehicle.
-- **Seed Car 5**: `hnode_156_host_0` - Represents the fifth autonomous vehicle.
-- **Seed Car 6**: `hnode_157_host_0` - Represents the sixth autonomous vehicle.
-- **Traffic Generator**: `hnode_158_host_0` - Generates traffic scenarios within the simulation.
+- **Controller**: `151/host_0` - Handles control logic for simulations. 
+- **Seed Car 1**: `152/host_0` - Represents the first autonomous vehicle in the simulation.
+- **Seed Car 2**: `153/host_0` - Represents the second autonomous vehicle.
+- **Seed Car 3**: `154/host_0` - Represents the third autonomous vehicle.
+- **Seed Car 4**: `155/host_0` - Represents the fourth autonomous vehicle.
+- **Seed Car 5**: `156/host_0` - Represents the fifth autonomous vehicle.
+- **Seed Car 6**: `157/host_0` - Represents the sixth autonomous vehicle.
+- **Traffic Generator**: `158/host_0` - Generates traffic scenarios within the simulation.
 ### Testing After Installation
 After installing CARLA Simulator, SEED Emulator, and setting up Carlaviz along with the Internet Map feature, it's crucial to ensure everything is functioning correctly. This section will guide you through the testing process to verify the integration and operational status of these components.
 #### Testing Carlaviz and Internet Map Integration
@@ -124,7 +123,19 @@ After installing CARLA Simulator, SEED Emulator, and setting up Carlaviz along w
     - Similarly, to check if the Internet Map feature of the SEED Emulator is working, navigate to `http://localhost:8090` in your web browser. This should load the Internet Map dashboard if the emulator is correctly set up and running.
 3. **Ensure Proper Communication:**
     - Both Carlaviz and the Internet Map should display real-time data from the CARLA simulation. Initial absence of vehicles or scenarios is normal until the next step is completed.
-
+#### Validating Vehicle Spawn and Web Socket Server:
+1. **Wait for Initialization:**
+    - After starting the SEED Emulator, allow up to one minute for initial setups to complete and for it to begin communicating with CARLA.
+2. **Observe Vehicle Spawn:**
+    - Within the CARLA environment (the spectator view window that appeared upon running `./CarlaUE4.sh`), observe for vehicle spawn. The process might take a moment after the emulator starts.
+3. **Check Carlaviz Visualization:**
+    - Refresh the Carlaviz page (`http://localhost:8080`) and check for the visualization of spawned vehicles and any ongoing scenarios. Movement and interaction should reflect real-time simulation data.
+4. **Web Socket Server Check**: 
+	- 4. Verify the Web Socket server's functionality on `150/host_0` at `10.150.0.71:6789` by accessing it via the SEED Emulator's Internet Map dashboard.
+#### Installation Troubleshooting
+- **No Vehicles in CARLA or Carlaviz:** Ensure that the SEED Emulator is running without errors. Check the terminal or command prompt for error messages. Revisit the `docker-compose.yml` file for any configuration issues.
+- **Dashboard/Visualization Not Loading:** Verify the server ports are not in use by another application and firewall settings allow traffic on ports 8080 and 8090.
+- **Scenario Not Progressing:** Check the connection between the SEED Emulator and CARLA. The emulator should properly configure scenario based on its script, which then should be visible in CARLA and Carlaviz.
 ### Usage 
 
 
