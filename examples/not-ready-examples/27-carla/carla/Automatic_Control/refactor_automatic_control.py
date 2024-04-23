@@ -684,11 +684,6 @@ def main():
         default="on", 
         help="Enable or disable the WebSocket client (on/off)")
 
-
-
-
-
-
     args = argparser.parse_args()
     global role_name 
     role_name= "seed" + args.r_name

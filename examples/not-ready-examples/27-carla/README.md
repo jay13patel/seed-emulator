@@ -1,9 +1,28 @@
 # CARLA-SEED Example
-This manual provides comprehensive guidance on setting up, operating, and optimizing Carla-Seed, ensuring you efficiently leverage both simulation and emulation.
+This manual provides comprehensive guidance on setting up, operating, and optimizing Carla-Seed, ensuring you efficiently leverage both simulation and emulation.The developer manual can be found [here](carla_seed.md)
 ## Table of Contents
-- [CARLA-SEED](#carla-seed-example)
+- [CARLA-SEED Example](#carla-seed-example)
   - [Table of Contents](#table-of-contents)
   - [What is CARLA Simulator](#what-is-carla-simulator)
+  - [Key Components of CARLA Simulator](#key-components-of-carla-simulator)
+  - [CARLA Simulator + SEED Emulator](#carla-simulator--seed-emulator)
+	  - [Integration Architecture](#integration-architecture)
+	  - [Integration Features](#integration-features)
+	  - [CARLA Simulator Installation](#carla-simulator-installation)
+		  - [System Requirements](#system-requirements-for-carla-server)
+		  - [Windows Installation](#windows-installation)
+		  - [Linux Installation](#linux-installation)
+	  - [SEED Emulator Installation](#seed-emulator-installation)
+	  - [SEED Emulator Container Terminology](#seed-emulator-container-terminology)
+	  - [Testing After Installation](#testing-after-installation)
+		  - [Testing Carlaviz and Internet Map](testing-carlaviz-and-internet-map-integration)
+		  - [Validating Vehicle Spawn and Web Socket Server](#validating-vehicle-spawn-and-web-socket-server)
+	  - [Installation Troubleshooting](#installation-troubleshooting)
+	  - [Usage](#usage)
+	  - [Troubleshooting](#troubleshooting)
+		  - [Common Issues](#common-issues)
+		  - [Debugging Tips](#debugging-tips)
+	  - [Future Work](#future-work)
 ## What is CARLA Simulator
 CARLA Simulator is an open-source platform designed specifically for the development and testing of autonomous driving systems. It uses Unreal Engine, known for its powerful rendering capabilities, to create highly realistic urban environments. This allows researchers and developers to simulate and analyze various scenarios that autonomous vehicles might encounter.
 
@@ -25,7 +44,10 @@ For detailed usage, please refer to the CARLAVIZ documentation [here](https://gi
 ### Integration Architecture
 
 ![carlaseed arch](carlaseed_arch.png)
-
+### Integration Features
+#### Simulation Controls
+#### Data Exchange
+#### Visualizations
 ### CARLA Simulator Installation
 #### System Requirements for CARLA Server
 - **Operating Systems:** Windows, Linux
@@ -93,11 +115,11 @@ For detailed usage, please refer to the CARLAVIZ documentation [here](https://gi
 Upon launching CARLA, a window showcasing a cityscape in spectator mode appears; navigate using the mouse and WASD keys, with the right mouse button for directional control, as the server awaits client connections for interactive simulation.
 ### SEED Emulator Installation
 1. **Install the necessary software**
-To run the emulator, you need to install `docker`, `docker-compose`, and `python3`
+	- To run the emulator, you need to install `docker`, `docker-compose`, and `python3`
 2. **Set up the environment variable**
-To run the emulator code, you need to add this folder to the `PYTHONPATH` environment variable. This can be done by running `source development.env` inside the project's root directory.
+	- To run the emulator code, you need to add this folder to the `PYTHONPATH` environment variable. This can be done by running `source development.env` inside the project's root directory.
 3. **Run SEED Emulator**
-Build and run the pre-generated containers. First `cd output/`, then do `docker-compose build && docker-compose up`. The emulator will start running.
+	- Build and run the pre-generated containers. First `cd output/`, then do `docker-compose build && docker-compose up`. The emulator will start running.
 
 ![carlaseed](carlaseed.png)
 
@@ -112,8 +134,8 @@ Build and run the pre-generated containers. First `cd output/`, then do `docke
 - **Seed Car 6**: `157/host_0` - Represents the sixth autonomous vehicle.
 - **Traffic Generator**: `158/host_0` - Generates traffic scenarios within the simulation.
 ### Testing After Installation
-After installing CARLA Simulator, SEED Emulator, and setting up Carlaviz along with the Internet Map feature, it's crucial to ensure everything is functioning correctly. This section will guide you through the testing process to verify the integration and operational status of these components.
-#### Testing Carlaviz and Internet Map Integration
+After installing CARLA Simulator, SEED Emulator, and setting up Carlaviz along with the Internet Map feature, it's crucial to ensure everything is functioning correctly. This section will guide you through the testing process to verify the operational status of these components.
+#### Testing Carlaviz and Internet Map
 1. **Verify Carlaviz is Running:**
     - After launching Carlaviz, open a web browser and visit `http://localhost:8080`. You should see a visualization interface of CARLA’s environment. If this page loads successfully, Carlaviz is running correctly.
 
@@ -141,13 +163,7 @@ After installing CARLA Simulator, SEED Emulator, and setting up Carlaviz along w
 
 
 
-### Integration Features
 
-#### Simulation Controls
-
-#### Data Exchange
-
-#### Visualizations
 
 ### Troubleshooting
 
