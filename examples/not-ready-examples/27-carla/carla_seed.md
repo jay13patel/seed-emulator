@@ -84,11 +84,14 @@ The diagram outlines the workflow for setting a destination in a vehicle simulat
 ##### **Command Line Argument Details**
 
 **WebSocket and CARLA Server Configurations**: The script allows configuration of IP addresses and port numbers for both the WebSocket and CARLA servers to establish connections. This is crucial for environments where the servers may not run on default settings or local hosts.
+```python
+parser.add_argument("--w_ip", default="localhost", help="IP address of the WebSocket server") `
+parser.add_argument("--w_port", default="6789", help="Port number of the WebSocket server") `
+parser.add_argument("--c_ip", default="localhost", help="IP address of the CARLA server") `
+parser.add_argument("--c_port", default=2000, type=int, help="Port number of the CARLA server")`
+python```
 
-`parser.add_argument("--w_ip", default="localhost", help="IP address of the WebSocket server") `
-`parser.add_argument("--w_port", default="6789", help="Port number of the WebSocket server") `
-`parser.add_argument("--c_ip", default="localhost", help="IP address of the CARLA server") `
-`parser.add_argument("--c_port", default=2000, type=int, help="Port number of the CARLA server")`
+
 
 ##### Arguments information
 ###### WebSocket IP (--w_ip)**
