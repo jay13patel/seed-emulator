@@ -12,6 +12,7 @@ The Developer Manual offers detailed insights into project architecture, technic
   - [Technical Implementation](#technical-implementation)
 	  - [Controller.py](#controllerpy)
 	  - [Webserver.py](#webserverpy)
+	  - [Config.py]()
 	
 ## Core concepts
 ### World and client
@@ -271,12 +272,9 @@ speed_kmh = 3.6 * math.sqrt(velocity.x**2 + velocity.y**2 + velocity.z**2)
 ```
 **Purpose**: Calculates the speed of the vehicle in kilometers per hour from its velocity vector, providing a crucial metric for assessing vehicle performance in real-time.
 #### Webserver.py
-
-This server is set up to dynamically accept WebSocket connections, manage messages related to vehicle destinations and updates, and maintain a list of connected clients to facilitate message broadcasting.
-
+This server is set up to dynamically accept Web Socket connections, manage messages related to vehicle destinations and updates, and maintain a list of connected clients to facilitate message broadcasting.
 ##### **Command Line Argument Details**
-
-The script allows for the dynamic configuration of IP addresses and port numbers for the WebSocket server, facilitating the customization necessary for various network environments.
+The script allows for the dynamic configuration of IP addresses and port numbers for the Web Socket server, facilitating the customization necessary for various network environments.
 ```python
 parser.add_argument("--ws_ip", default="localhost", help="IP address of the WebSocket server") 
 parser.add_argument("--ws_port", default=6789, type=int, help="Port number of the WebSocket server")
@@ -285,18 +283,68 @@ parser.add_argument("--ws_port", default=6789, type=int, help="Port number of th
 ##### Arguments Information
 ###### **Web Socket Server IP (--ws_ip)**
 - **Default**: `localhost`
-- **Purpose**: Specifies the IP address where the WebSocket server will listen for incoming connections.
+- **Purpose**: Specifies the IP address where the Web Socket server will listen for incoming connections.
 - **Usage Example**:
 ```cmd
 --ws_ip 192.168.1.100
 ```
 ###### **Web Socket Server Port (--ws_port)**
 - **Default**: `6789`
-- **Purpose**: Defines the port number on which the WebSocket server will accept connections.
+- **Purpose**: Defines the port number on which the Web Socket server will accept connections.
 - **Usage Example**:
 ```cmd
 --ws_port 8080
 ```
+##### **Connected Clients Management**
+```python
+connected_clients = set()
+```
+**Purpose**: Maintains a set of active client connections to manage broadcasting messages effectively.
+
+##### **Handle Client Connections**
+```python
+async def handle_client(websocket, path)
+```
+**Purpose**: Manages Web Socket connections in an asynchronous manner, handling each client in a separate coroutine which allows for concurrent operations without blocking
+##### Connection Tracking
+```python
+connected_clients.add(websocket)
+```
+**Purpose**: This line is crucial as it adds the newly connected Web Socket client to the `connected_clients` set. This action is essential for managing and maintaining a record of all active client connections.
+
+#### **Message Handling Loop**
+
+```python 
+async for message in websocket:     
+	data = json.loads(message)
+```
+**Purpose**: Continuously listens for incoming messages from clients, decoding JSON messages for further processing.
+#### **Message Processing**
+```python
+if data["type"] == "set_destination":`
+```
+	
+**Purpose**: Handles specific types of messages (e.g., setting a vehicle's destination), and then broadcasts these messages to other connected clients, ensuring all clients are updated about relevant actions.
+#### **Broadcasting Messages**
+
+```python
+tasks = [client.send(message) for client in connected_clients if client != websocket] 
+await asyncio.wait(tasks)
+```
+**Purpose**: Sends messages to all connected clients except the sender, facilitating functionality like live updates and synchronization among multiple clients.
+
+### **Server Initialization**
+```python
+start_server = websockets.serve(handle_client, args.w_ip, args.w_port)
+```
+**Purpose**: Initializes the WebSocket server, binding it to the specified IP address and port, ready to accept client connections.
+#### **Infinite Server Run**
+```python
+asyncio.get_event_loop().run_forever()
+```
+**Purpose**: Keeps the server running indefinitely, handling incoming connections and data continuously until manually interrupted, typically by a user with Ctrl+C.
+
+#### Config.py
 
 
 ### Integration Architecture
