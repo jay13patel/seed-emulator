@@ -12,7 +12,7 @@ The Developer Manual offers detailed insights into project architecture, technic
   - [Technical Implementation](#technical-implementation)
 	  - [Controller.py](#controllerpy)
 	  - [Webserver.py](#webserverpy)
-	  - [Config.py]()
+	  - [Config.py](#configpy)
 	
 ## Core concepts
 ### World and client
