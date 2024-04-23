@@ -100,6 +100,18 @@ To run the emulator code, you need to add this folder to the `PYTHONPATH` envi
 #### Run SEED Emulator
 Build and run the pre-generated containers. First `cd output/`, then do `docker-compose build && docker-compose up`. The emulator will start running.
 
+![carlaseed](carlaseed.png)
+
+### SEED Emulator Container Terminology
+- **Web Socket Server**: `hnode_150_host_0` - Manages Web Socket services for real-time communication.
+- **Controller**: `hnode_151_host_0` - Handles control logic for simulations.
+- **Seed Car 1**: `hnode_152_host_0` - Represents the first autonomous vehicle in the simulation.
+- **Seed Car 2**: `hnode_153_host_0` - Represents the second autonomous vehicle.
+- **Seed Car 3**: `hnode_154_host_0` - Represents the third autonomous vehicle.
+- **Seed Car 4**: `hnode_155_host_0` - Represents the fourth autonomous vehicle.
+- **Seed Car 5**: `hnode_156_host_0` - Represents the fifth autonomous vehicle.
+- **Seed Car 6**: `hnode_157_host_0` - Represents the sixth autonomous vehicle.
+- **Traffic Generator**: `hnode_158_host_0` - Generates traffic scenarios within the simulation.
 ### Testing After Installation
 After installing CARLA Simulator, SEED Emulator, and setting up Carlaviz along with the Internet Map feature, it's crucial to ensure everything is functioning correctly. This section will guide you through the testing process to verify the integration and operational status of these components.
 #### Testing Carlaviz and Internet Map Integration
