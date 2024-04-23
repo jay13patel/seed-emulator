@@ -238,14 +238,12 @@ def get_vehicle_roles():
 ```python
 client = carla.Client(args.c_ip, args.c_port)
 ```
-
 **Purpose**: Initializes a connection to the CARLA server using the provided IP address and port number, setting up the client to interact with the simulation environment.
 
 ##### **Getting the World**:
 ```python 
 world = client.get_world()
 ```
-
 **Purpose**: Retrieves the world from the CARLA server which contains all the dynamic elements, like vehicles and sensors, facilitating access to further simulation data.
 ##### **Filtering Vehicle Actors**:
 ```python 
@@ -346,7 +344,164 @@ asyncio.get_event_loop().run_forever()
 
 #### Config.py
 
+`Config.py` is a configuration script for the CARLA simulation server, enabling detailed customization of network settings, environmental conditions, and simulation parameters via a command-line interface. This tool allows users to tailor the simulation environment to specific research and testing needs, ensuring optimal performance and precise control.
 
+Read more: https://carla.readthedocs.io/en/0.9.7/configuring_the_simulation/
+
+#### **Command Line Arguments for CARLA Config.py Script**
+
+This script provides a flexible setup to configure and control various aspects of the CARLA simulation environment. Command-line arguments allow users to customize settings such as host and port configuration, map management, and simulation settings.
+##### **Host (--host)**
+- **Default**: `localhost`
+- **Purpose**: Specifies the IP address of the CARLA server.
+- **Usage Example**:
+```cmd
+--host 192.168.1.100
+```
+##### **Port (--port, -p)**
+- **Default**: `2000`
+- **Purpose**: Sets the TCP port for the CARLA server.
+- **Usage Example**:
+```cmd
+--port 2000
+```
+##### **Default Settings (--default)**
+- **Purpose**: Applies default simulation settings.
+- **Usage Example**:
+ ```cmd
+--default
+```
+##### **Map (--map, -m)**
+- **Purpose**: Loads a specific map; use the `--list` option to view available maps.
+- **Usage Example**:
+ ```cmd
+--map Town05
+```
+##### **Reload Map (--reload-map, -r)**
+- **Purpose**: Reloads the current map.
+- **Usage Example**:
+
+```cmd
+--reload-map
+```
+##### **Delta Seconds (--delta-seconds)**
+- **Purpose**: Sets fixed delta seconds for the simulation's frame rate; zero for variable frame rate.
+- **Usage Example**:
+```cmd
+--delta-seconds 0.05
+```
+#### **Fixed FPS (--fps)**
+- **Purpose**: Sets a fixed frames per second rate; similar to `--delta-seconds`.
+- **Usage Example**:
+```cmd
+--fps 20
+```
+#### **Rendering (--rendering)**
+- **Purpose**: Enables rendering in the CARLA(Carla Server) simulation.
+- **Usage Example**:
+   
+```cmd
+--rendering
+```
+
+#### **No Rendering (--no-rendering)**
+
+- **Purpose**: Disables rendering in the simulation(Carla Server).
+- **Usage Example**:
+    
+    bashCopy code
+    
+    `--no-rendering`
+    
+
+#### **Disable Synchronous Mode (--no-sync)**
+
+- **Purpose**: Disables synchronous mode, allowing the simulation to run asynchronously.
+- **Usage Example**:
+    
+    bashCopy code
+    
+    `--no-sync`
+    
+
+#### **Weather (--weather)**
+
+- **Purpose**: Sets a weather preset; use `--list` to view available presets.
+- **Usage Example**:
+    
+    bashCopy code
+    
+    `--weather ClearNoon`
+    
+
+#### **Inspect (--inspect, -i)**
+
+- **Purpose**: Inspects the current simulation state and prints details.
+- **Usage Example**:
+    
+    bashCopy code
+    
+    `--inspect`
+    
+
+#### **List Options (--list, -l)**
+
+- **Purpose**: Lists available maps, weather presets, and other configurable options.
+- **Usage Example**:
+    
+    bashCopy code
+    
+    `--list`
+    
+
+#### **List Blueprints (--list-blueprints, -b)**
+
+- **Purpose**: Lists vehicle and actor blueprints that can be spawned in the simulation.
+- **Usage Example**:
+    
+    bashCopy code
+    
+    `--list-blueprints vehicle.*`
+    
+
+#### **XODR Path (--xodr-path)**
+
+- **Purpose**: Loads a map using an OpenDRIVE file.
+- **Usage Example**:
+    
+    bashCopy code
+    
+    `--xodr-path /path/to/map.xodr`
+    
+
+#### **OSM Path (--osm-path)**
+
+- **Purpose**: Converts OpenStreetMap data to a drivable OpenDRIVE map.
+- **Usage Example**:
+    
+    bashCopy code
+    
+    `--osm-path /path/to/map.osm`
+    
+
+#### **Tile Stream Distance (--tile-stream-distance)**
+
+- **Purpose**: Sets the tile streaming distance for large maps.
+- **Usage Example**:
+    
+    bashCopy code
+    
+    `--tile-stream-distance 500`
+    
+
+#### **Actor Active Distance (--actor-active-distance)**
+
+- **Purpose**: Sets the active distance for actors in large maps.
+- **Usage Example**:
+    
+    bashCopy code
+    
+    `--actor-active-distance 100`
 ### Integration Architecture
 
 ### System Requirements 
