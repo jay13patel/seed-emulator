@@ -13,6 +13,7 @@ The Developer Manual offers detailed insights into project architecture, technic
 	  - [Controller.py](#controllerpy)
 	  - [Webserver.py](#webserverpy)
 	  - [Config.py](#configpy)
+	  - [Generate Traffic.py]()
 	
 ## Core concepts
 ### World and client
@@ -429,13 +430,136 @@ This script provides a flexible setup to configure and control various aspects o
 #### **List Options (--list, -l)**
 - **Purpose**: Lists available maps, weather presets, and other configurable options.
 - **Usage Example**:
-
 ```cmd
 --list
 ```
 
-### Integration Architecture
+#### Generate_traffic.py
 
+`generate_traffic.py` is a Python script designed for the CARLA simulation(CARLA World) environment to dynamically generate and manage traffic, including vehicles and pedestrians.
+
+Read more: https://carla.readthedocs.io/en/latest/adv_traffic_manager/#creating-a-traffic-manager
+#### Command Line Arguments for CARLA Generate_traffic.py Script
+#### **Host Server (--host)**
+- **Default**: `127.0.0.1`
+- **Purpose**: Specifies the IP address of the host server where the CARLA simulation is running.
+- **Usage Example**:
+```cmd
+--host 127.0.0.1
+```
+#### **Port (--port, -p)**
+
+- **Default**: `2000`
+- **Purpose**: Sets the TCP port for connecting to the CARLA server.
+- **Usage Example**:
+```cmd
+--port 2000
+```
+#### **Number of Vehicles (--number-of-vehicles, -n)**
+
+- **Default**: `30`
+- **Purpose**: Specifies the number of vehicles to spawn in the simulation.
+- **Usage Example**:
+```cmd
+ --number-of-vehicles 50
+ ```
+#### **Number of Walkers (--number-of-walkers, -w)**
+- **Default**: `10`
+- **Purpose**: Specifies the number of pedestrian actors (walkers) to spawn.
+- **Usage Example**:
+```cmd
+--number-of-walkers 15
+```
+#### **Safe (--safe)**
+- **Purpose**: Ensures that vehicles are spawned in a 'safe' mode, preventing spawning in locations that would immediately cause collisions.
+- **Usage Example**:
+```cmd
+--safe
+```
+#### **Vehicle Filter (--filterv)**
+- **Default**: `vehicle.*`
+- **Purpose**: Filters the vehicle models based on the given pattern.
+- **Usage Example**:
+```cmd
+--filterv "vehicle.audi.*"
+```
+#### **Walker Filter (--filterw)**
+- **Default**: `walker.pedestrian.*`
+- **Purpose**: Filters the pedestrian types based on the given pattern.
+- **Usage Example**:
+```cmd
+--filterw "walker.pedestrian.adult.*"
+```
+#### **Vehicle Generation (--generationv)**
+- **Default**: `All`
+- **Purpose**: Restricts the vehicle models to a specific generation.
+- **Usage Example**:
+```cmd
+--generationv 2
+```
+#### **Walker Generation (--generationw)**
+- **Default**: `2`
+- **Purpose**: Restricts the pedestrian types to a specific generation.
+- **Usage Example**:
+```cmd
+--generationw 1
+```
+#### **Traffic Manager Port (--tm-port)**
+- **Default**: `8000`
+- **Purpose**: Specifies the port for communication with the Traffic Manager.
+- **Usage Example**:
+```cmd
+--tm-port 8000
+```
+#### **Asynchronous Mode (--asynch)**
+- **Purpose**: Activates asynchronous mode execution in the simulation(CARLA world).
+- **Usage Example**:
+```cmd
+--asynch
+```
+#### **Hybrid Mode (--hybrid)**
+- **Purpose**: Activates hybrid mode for the Traffic Manager to manage vehicle physics more realistically.
+- **Usage Example**:
+```cmd
+--hybrid
+```
+#### **Seed (--seed,-s)**
+- **Purpose**: Sets a deterministic seed for vehicle and pedestrian behavior in the simulation.
+- **Usage Example**:
+```cmd
+--seed 12345
+```
+#### **Pedestrian Seed (--seedw)**
+- **Default**: `0`
+- **Purpose**: Sets the seed for pedestrian module behavior.
+- **Usage Example**:
+```cmd
+--seedw 456
+```
+#### **Car Lights On (--car-lights-on)**
+- **Purpose**: Enables automatic management of car lights.
+- **Usage Example**:
+```cmd
+--car-lights-on
+```
+#### **Hero Vehicle (--hero)**
+- **Purpose**: Designates one of the vehicles as a 'hero' vehicle for specific testing or observation.
+- **Usage Example**:
+```cmd
+--hero
+```
+#### **Respawn (--respawn)**
+- **Purpose**: Enables automatic respawning of dormant vehicles, useful in large maps.
+- **Usage Example**:
+```cmd
+--respawn
+```
+#### **No Rendering (--no-rendering)**
+- **Purpose**: Activates a mode where the simulation runs without graphical rendering.
+- **Usage Example**:
+```cmd
+--no-rendering
+```
 ### System Requirements 
 
 ### CARLA Simulator Installation
