@@ -15,7 +15,7 @@ The Developer Manual offers detailed insights into project architecture, technic
 	  - [Config.py](#configpy)
 	  - [Generate Traffic.py](#generate_trafficpy)
 	  - [Carla Viz](#carla-viz)
-	  - [Headless_automatic_control.py]()
+	  - [Headless_automatic_control.py](#headless_automatic_controlpy)
 	
 	
 ## Core concepts
