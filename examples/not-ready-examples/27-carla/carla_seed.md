@@ -13,8 +13,8 @@ The Developer Manual offers detailed insights into project architecture, technic
 	  - [Controller.py](#controllerpy)
 	  - [Webserver.py](#webserverpy)
 	  - [Config.py](#configpy)
-	  - [Generate Traffic.py]()
-	  - [Carla Viz]()
+	  - [Generate Traffic.py](#generate_trafficpy)
+	  - [Carla Viz](#carla-viz)
 	
 	
 ## Core concepts
