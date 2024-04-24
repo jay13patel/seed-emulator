@@ -15,6 +15,7 @@ The Developer Manual offers detailed insights into project architecture, technic
 	  - [Config.py](#configpy)
 	  - [Generate Traffic.py](#generate_trafficpy)
 	  - [Carla Viz](#carla-viz)
+	  - [Headless_automatic_control.py]()
 	
 	
 ## Core concepts
@@ -644,7 +645,7 @@ Read more: https://carla.readthedocs.io/en/latest/plugins_carlaviz/#get-carlaviz
 - **Default**: 3
 - **Usage Example**:
 ```cmd
---simulator_retry_times_after_disconnection 10\
+--simulator_retry_times_after_disconnection 10
 ```
 #### **Simulator Sensor Max Lag Frame (--simulator_sensor_max_lag_frame)**
 - **Type**: uint32
@@ -678,11 +679,116 @@ Read more: https://carla.readthedocs.io/en/latest/plugins_carlaviz/#get-carlaviz
 ```cmd
 --translation_allow_static_objects false
 ```
-### CARLA Simulator Installation
-### SEED Emulator Installation
+### Headless_Automatic_control.py
+`Headless_Automatic_control.py` manages the autonomous behavior of vehicles in a headless mode, meaning it runs without a graphical user interface, facilitating the creation and control of multiple cars through scriptable, automated scenarios in a distributed system. This script interacts with a CARLA server remotely, receiving commands and sending vehicle status via WebSocket connections.
+##### **Command Line Argument Details**
+##### Host (--host)
+- **Default:** "127.0.0.1"
+- **Purpose:** Specifies the IP address of the host server where the CARLA World is running.
+- **Usage Example:**
+```cmd
+--host 192.168.1.100
+```
+##### Port (--port)
+- **Default:** 2000
+- **Purpose:** Specifies the TCP port of the host server for connecting to the CARLA server.
+- **Usage Example:**
+```cmd
+--port 2000
+```
+##### Resolution (--res)
+- **Default:** "1280x720"
+- **Purpose:** Sets the simulation window resolution, formatted as WIDTHxHEIGHT.
+- **Usage Example:**
+```cmd
+--res 1920x1080
+```
+##### Synchronous Mode (--sync)
+- **Default:** False
+- **Purpose:** Enables synchronous mode, ensuring the simulation only advances on command, which is crucial for precise simulations.
+- **Usage Example:**
+```cmd
+--sync
+```
+##### Actor Filter (--filter)
+- **Default:** "vehicle.*"
+- **Purpose:** Filters the types of vehicle actors to spawn based on a pattern.
+- **Usage Example:**
+```cmd
+--filter "vehicle.audi.*"
+```
+##### Actor Generation (--generation)
+- **Default:** "2"
+- **Purpose:** Restricts vehicle selection to a specific generation, useful for controlling vehicle types in scenarios.
+```cmd
+--generation "1
+```
+##### Loop (--loop,-l)
+- **Type**: bool
+- **Default:** False
+- **Purpose:** Enables continuous reassignment of random destinations after reaching each one, for ongoing testing.
+- **Usage Example:**
+```cmd
+--loop
+```
+##### Agent Type (--agent)
+- **Default:** "Behavior"
+- **Choices**:"Behavior", "Basic", "Constant"
+- **Purpose:** Chooses the type of driving agent to control the vehicle dynamically.
+- **Usage Example:**
+```cmd
+--agent "Constant"
+```
 
-one
-
+##### Agent Behavior (--behavior)
+- **Default:** "normal"
+- **Choices**:"cautious", "normal", "aggressive"
+- **Purpose:** Sets the behavior mode of the agent to adjust driving style according to traffic conditions.
+- **Usage Example:**
+```cmd
+--behavior "aggressive"
+```
+##### Seed (--seed)
+- **Default:** None
+- **Purpose:** Sets a seed for random number generation, ensuring scenario repeatability.
+- **Usage Example:**
+```cmd
+--seed 12345
+```
+##### WebSocket IP (--ws_ip)
+- **Default:** "localhost"
+- **Purpose:** Specifies the IP address of the WebSocket server for vehicle to controller communications.
+- **Usage Example:**
+```cmd
+--ws_ip "10.0.1.5"
+```
+##### WebSocket Port (--ws_port)
+- **Default:** 6789
+- **Purpose:** Specifies the port for the WebSocket server.
+- **Usage Example:**
+```
+--ws_port 6789
+```
+##### Role Name (--r_name)
+- **Default:** "seed_car_1"
+- **Purpose:** Assigns a specific role name to the vehicle, useful for identification in scripts or logs.
+```cmd
+--r_name "seed_car_2"
+```
+##### Camera Manager (--cam)
+- **Default:** "off"
+- **Purpose:** Toggles the camera manager on or off, essential for visual monitoring or running in a headless environment.
+- **Usage Example:**
+```cmd
+--cam "on"
+```
+##### WebSocket Enable (--ws_enable)
+- **Default:** "on"
+- **Purpose:** Enables or disables WebSocket communication for the vehicle.
+- **Usage Example:**
+```cmd
+--ws_enable "off"
+```
 ### Usage 
 ### Integration Features
 
