@@ -14,6 +14,8 @@ The Developer Manual offers detailed insights into project architecture, technic
 	  - [Webserver.py](#webserverpy)
 	  - [Config.py](#configpy)
 	  - [Generate Traffic.py]()
+	  - [Carla Viz]()
+	
 	
 ## Core concepts
 ### World and client
@@ -560,10 +562,123 @@ Read more: https://carla.readthedocs.io/en/latest/adv_traffic_manager/#creating-
 ```cmd
 --no-rendering
 ```
-### System Requirements 
+#### Carla Viz
+CARLA VIZ is a visualization tool designed to enhance the user experience when working with the CARLA simulator(CARLA world). It provides real-time graphical representation of simulations, enabling detailed analysis and debugging of autonomous vehicle behaviors in dynamic environments.
 
+Read more: https://carla.readthedocs.io/en/latest/plugins_carlaviz/#get-carlaviz
+##### Connector Host(--connector_host)
+- **Type**: string
+- **Default:** "0.0.0.0"
+- **Purpose:** Specifies the host address for the Carla Viz server to listen on. Basically, to set ip address of Carla Viz Server
+- **Usage Example:** 
+```cmd
+--connector_host 192.168.1.5
+```
+##### **Connector Port (--connector_port)**
+- **Type**: uint32
+- **Purpose**: Specifies the port number for the Carla Viz server to listen on. Basically, to set port number of Carla Viz Server.
+- **Default**: 8081
+- **Usage Example**:
+```cmd
+--connector_port 9090
+```
+#### **Connector Update Interval Milliseconds 
+(--connector_update_interval_milliseconds)
+- **Type**: uint32
+- **Purpose**: Determines how frequently, in milliseconds, the connector should update. Basically, in how many milliseconds Carla Viz will get data from Carla World.
+- **Default**: 500
+- **Usage Example**:
+```cmd
+--connector_update_interval_milliseconds 1000
+```
+#### **Log Filename (--log_filename)**
+- **Type**: string
+- **Purpose**: Sets the filename where logs will be stored.
+- **Usage Example**:
+```cmd
+--log_filename server.log
+```
+#### **Log Level (--log_level)**
+- **Type**: string
+- **Purpose**: Sets the level of logging detail.
+- **Default**: "info"
+- **Usage Example**:
+```cmd
+--log_level debug
+```
+#### **Simulator Ego Vehicle Name (--simulator_ego_vehicle_name)**
+- **Type**: string
+- **Purpose**: Role Name the vehicle in the simulator which you monitor.
+- **Default**: "ego"
+- **Usage Example**:
+```cmd
+--simulator_ego_vehicle_name alpha
+```
+#### **Simulator Host (--simulator_host)**
+- **Type**: string
+- **Purpose**: Defines the host address of the CARLA simulator( CARLA world).
+- **Default**: "localhost"
+- **Usage Example**:
+```cmd
+--simulator_host 10.0.0.2
+```
+#### **Simulator Port (--simulator_port)**
+- **Type**: uint32
+- **Purpose**: Specifies the port number for connecting to the simulator.
+- **Default**: 2000
+- **Usage Example**:
+```cmd
+--simulator_port 3000
+```
+#### **Simulator Retry Interval Seconds (--simulator_retry_interval_seconds)**
+- **Type**: uint32
+- **Purpose**: Sets the interval, in seconds, between connection retries to the simulator.
+- **Default**: 1
+- **Usage Example**:
+```cmd
+--simulator_retry_interval_seconds 5
+```
+#### **Simulator Retry Times After Disconnection (--simulator_retry_times_after_disconnection)**
+- **Type**: uint32
+- **Purpose**: Specifies how many times to retry connecting to the simulator after a disconnection.
+- **Default**: 3
+- **Usage Example**:
+```cmd
+--simulator_retry_times_after_disconnection 10\
+```
+#### **Simulator Sensor Max Lag Frame (--simulator_sensor_max_lag_frame)**
+- **Type**: uint32
+- **Purpose**: Limits the maximum frame lag for sensors in the simulator.
+- **Default**: 30
+- **Usage Example**:
+```cmd
+--simulator_sensor_max_lag_frame 10
+```
+#### **Simulator Sleep Between Updates Milliseconds (--simulator_sleep_between_updates_milliseconds)**
+- **Type**: uint32
+- **Purpose**: Decides whether to insert a delay between two updates in the simulator, and if so, how long in milliseconds.
+- **Default**: 0
+- **Usage Example**:
+```cmd
+--simulator_sleep_between_updates_milliseconds 100
+```
+#### **Simulator Timeout Seconds (--simulator_timeout_seconds)**
+- **Type**: uint32
+- **Purpose**: Sets the timeout duration, in seconds, for connecting to the simulator.
+- **Default**: 10
+- **Usage Example**:
+```cmd
+--simulator_timeout_seconds 30
+```
+#### **Translation Allow Static Objects (--translation_allow_static_objects)**
+- **Type**: bool
+- **Purpose**: Controls whether static objects are shown in translations.
+- **Default**: true
+- **Usage Example**:
+```cmd
+--translation_allow_static_objects false
+```
 ### CARLA Simulator Installation
-
 ### SEED Emulator Installation
 
 one
